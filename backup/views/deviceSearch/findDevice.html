@@ -1,0 +1,39 @@
+<div ng-controller="findDeviceController" class="find-device-wrapper" ng-show="!showDeviceIndexView">
+    <span class="find-device-title">发现附近的设备</span>
+    <hr>
+    <form class="form-horizontal">
+    <div class="search-device">
+        <div class="control-group">
+            <label class="control-label">设备类型</label>
+            <div class="controls">
+                <div id="allType" class="search-all" ng-class="{'search-all-selected': selectAllType}" ng-click="oper.selectAll('type','allType')">不限</div> 
+                <label class="type search-checkbox checkbox inline" ng-repeat="type in types" value="{{type.type}}">
+                    <input type="checkbox" name="type" ng-click="toggleType()" value="{{type.type}}"> {{type.value}}
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">热门标签</label>
+            <div class="controls">
+                <div id="allTags" class="search-all search-all-selected" ng-class="{'search-all-selected': selectAllTags}" ng-click="oper.selectAll('tags','allTags')">不限</div> 
+                <label class="tags search-checkbox checkbox inline" ng-repeat="t in tags">
+                    <input type="checkbox" name="tags" ng-click="toggleTags()" value="{{t}}">{{t}}
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputTitle">关键字</label>
+            <div class="controls">
+                <input type="text" id="inputTitle" placeholder="可以添加附加关键字">
+                <button ng-click="" class="btn btn-info">确定</button>
+            </div>
+        </div>
+        <div class="gis">
+            <!--ng-controller="setPositionController"  -->
+            <div id="map-canvas" style=""></div>
+        </div>
+        </div>
+    </form>
+</div>
+
+<div ng-show="showDeviceIndexView" ng-include src="'views/device/deviceIndex.html'"></div>

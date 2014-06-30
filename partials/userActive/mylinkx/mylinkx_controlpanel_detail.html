@@ -1,0 +1,16 @@
+<h2 class="margin-bottom-20">控制器</h2>
+<div class="my-device-controlpanel">
+	<select ng-model="cUnit" ng-options="a.name for a in units">
+	</select>
+	<select ng-model="cPanel" ng-options="a.name for a in cUnit.panels" ng-change="changePanel(cPanel)" ng-class="cp-unit"></select>
+	<div class="root-container-panel"></div>
+</div>
+
+<div class="mylinkx-map-title-block" style="position: relative;margin-top: 40px;">
+    <h2 class="margin-bottom-20">地图</h2>
+    <div class="mylinkx-map-lat-lng">
+        <div class="map-icon"></div><span class="map-lat-text">{{device.longitude | positionFilter}}</span>
+        <div class="map-icon map-lat-icon"></div><span class="map-lng-text">{{device.latitude | positionFilter}}</span>
+    </div>
+</div>
+<div id="my_owen_linkx_device" class="mydevice-map-block"></div>

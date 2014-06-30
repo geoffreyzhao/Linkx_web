@@ -1,0 +1,407 @@
+<div class="add-rule-container" ng-controller="addRuleCtrl">
+	<label class="rule-header">触发动作</label>
+	<div class="edit-rule-container">
+		<div class="trigger-content" ng-repeat="trigger in displayTriggerArr">
+			<div class="trigger-title">触发</div>
+			<div class="trigger-body">
+				<label class="create-trigger-label" data-toggle="modal" data-target="#createTrigger" data-keyboard="false" ng-click="createTrigger()" data-backdrop="static" ng-show="!createTriggerEnd">新建触发</label>
+				<div ng-show="createTriggerEnd">
+					<span>当</span>
+					<label data-toggle="modal" data-target="#createTrigger" ng-click="editTriggerStep(1)" title="点击编辑">{{trigger.statusTagOption.label}}</label>
+					<label data-toggle="modal" data-target="#createTrigger" ng-click="editTriggerStep(2)" title="点击编辑">{{trigger.deviceTitle}}</label>
+					<span>监测到</span>
+					<label data-toggle="modal" data-target="#createTrigger" ng-click="editTriggerStep(3)" title="点击编辑">{{trigger.sensorTitle}}</label>
+					<label data-toggle="modal" data-target="#createTrigger" ng-click="editTriggerStep(4)" title="点击编辑">{{trigger.compareOption.label}} {{trigger.value}}</label>
+					<span>{{trigger.symbol}}</span>
+				</div>				
+			</div>
+			<p class="history-title" ng-click="selectFromTriggerHistory($index)" data-toggle="modal" data-target="#showHistoryTrigger" data-keyboard="true" data-backdrop="true">通过历史选择</p>
+			<div class="history-icon history-icon-blue"></div>
+      	<div class="clear"></div>
+		</div>
+		<div class="action-content">
+			<div class="action-title"><span>动作</span></div>
+			<div class="action-body">
+				<label class="create-action-label" data-toggle="modal" data-target="#createAction" data-keyboard="false" data-backdrop="static" ng-show="!createActionEnd">新建动作</label>
+				<div ng-show="createActionEnd" class="action-body-content">
+					<div class="action-body-content-static">
+						<span>则</span>
+						<label data-toggle="modal" data-target="#createAction" data-keyboard="false" data-backdrop="static" ng-click="recoverActionType()" title="点击编辑">{{displayAction.actionTypeLabel}}</label>
+					</div>
+					<div ng-show="tempActionStore.actionTypeOption.value == 'EMAIL'" class="action-body-content-dynamic">
+						<span>内容</span>
+						<label data-toggle="modal" data-target="#createAction" data-keyboard="false" data-backdrop="static" ng-click="recoverEmailContent()" title="点击编辑">{{displayAction.emailContent}}</label>
+						<span>到</span>
+						<label data-toggle="modal" data-target="#createAction" data-keyboard="false" data-backdrop="static" ng-click="recoverEmail()" title="点击编辑">{{displayAction.emailAddress}}</label>
+					</div>
+					<div ng-show="tempActionStore.actionTypeOption.value == 'SHARE'" class="action-body-content-dynamic">
+						<label data-toggle="modal" data-target="#createAction" data-keyboard="false" data-backdrop="static" ng-click="recoverShareSocial()" title="点击编辑">{{displayAction.shareSocialLabel}}</label>
+						<span>内容</span>
+						<label data-toggle="modal" data-target="#createAction" data-keyboard="false" data-backdrop="static" ng-click="recoverShareContent()" title="点击编辑">{{displayAction.shareContent}}</label>
+					</div>
+					<div ng-show="tempActionStore.actionTypeOption.value == 'PUSH'" class="action-body-content-dynamic">
+						<label data-toggle="modal" data-target="#createAction" data-keyboard="false" data-backdrop="static" ng-click="recoverControlDevice()" title="点击编辑">{{displayAction.device}}</label>
+						<span>中的控制单元</span>
+						<label data-toggle="modal" data-target="#createAction" data-keyboard="false" data-backdrop="static" ng-click="recoverControlUnit()" title="点击编辑">{{displayAction.unit}}</label>
+						<span>中的控制面板</span>
+						<label data-toggle="modal" data-target="#createAction" data-keyboard="false" data-backdrop="static" ng-click="recoverControlPanel()" title="点击编辑">{{displayAction.panel}}，</label>
+						<span>设置</span>
+						<label data-toggle="modal" data-target="#createAction" data-keyboard="false" data-backdrop="static" ng-click="recoverControlElement()" title="点击编辑">{{displayAction.element}}</label>
+						<div ng-show="displayAction.value != ''">
+							<span>为</span>
+							<label data-toggle="modal" data-target="#createAction" data-keyboard="false" data-backdrop="static" ng-click="recoverControlValue()" title="点击编辑">{{displayAction.value}}</label>
+						</div>
+					</div>
+				</div>
+			</div>
+				<div class="history-action-div">
+					<p class="history-title" data-toggle="modal" data-target="#showHistoryAction" data-keyboard="true" data-backdrop="true" ng-class="{'histoty-title-dc':'PUSH'==actionType}">通过历史选择</p>
+					<div class="history-icon history-icon-green" ng-class="{'history-icon-green-dc':'PUSH'==actionType}"></div>
+				</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="rule-operation" ng-show="addRuleFlag">
+		<div class="yes-no-icon yes-icon" ng-click="addRule()"></div>
+		<div class="yes-no-icon no-icon" ng-click="cancelAddRule()"></div>
+	</div>
+	<div class="rule-operation" ng-show="editRuleFlag">
+		<div class="yes-no-icon yes-icon" ng-click="editRule()"></div>
+		<div class="yes-no-icon no-icon" ng-click="cancelEditRule()"></div>
+	</div>
+	<div id="showHistoryTrigger" class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header history-list-head">
+		    		<a class="close history-close" data-dismiss="modal"></a>
+		    		<label class="history-content-title">选择历史触发条件</label>
+		  		</div>
+		  		<div class="modal-body" ng-show="historyTrigger.length==0">没有历史触发条件</div>
+		  		<div class="modal-body history-list-container" ng-show="historyTrigger.length>0">
+		    		<div ng-repeat="t in historyTrigger" class="history-data-item" ng-click="checkHistoryTrigger(t.jsonData, $index)" ng-class="{'history-item-active':triggerItemIndex==$index, 'history-item-normal':triggerItemIndex!=$index, 'last-history-item':$last}">
+						<div ng-bind-html="t.text | to_trusted"></div>
+					</div>
+		  		</div>
+				<div class="modal-footer history-operation" ng-show="historyTrigger.length>0">
+					<div class="yes-no-icon yes-icon" ng-click="addHistoryTrigger(triggerIndex)"></div>
+					<div class="yes-no-icon no-icon" ng-click="closeModal('#showHistoryTrigger')"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="showHistoryAction" class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header history-list-head">
+					<a class="close history-close" data-dismiss="modal"></a>
+		    		<label class="history-content-title">选择历史动作</label>
+				</div>
+				<div class="modal-body" ng-show="historyAction.length==0">没有历史动作</div>
+				<div class="modal-body history-list-container" ng-show="historyAction.length>0">
+					<div ng-repeat="a in historyAction" class="history-data-item"  ng-click="checkHistoryAction(a.jsonData, $index)" ng-class="{'history-item-active':actionItemIndex==$index, 'history-item-normal':actionItemIndex!=$index, 'last-history-item':$last}">
+						<div ng-bind-html="a.text | to_trusted"></div>
+					</div>
+				</div>
+				<div class="modal-footer history-operation" ng-show="historyAction.length>0">
+					<div class="yes-no-icon yes-icon" ng-click="addHistoryAction()"></div>
+					<div class="yes-no-icon no-icon" ng-click="closeModal('#showHistoryAction')"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="snsConnectConfirm" class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<a class="close history-close" data-dismiss="modal"></a>
+		    		<h3>信息提示</h3>
+				</div>
+				<div class="modal-body">
+					<p>当前未绑定{{shareTypeName}}帐号，立即去绑定？</p>
+				</div>
+				<div class="modal-footer">
+    				<button class="btn btn-primary" data-dismiss="modal" ng-click="openWin4BindSocialAccount();">是</button>
+    				<button class="btn" data-dismiss="modal">否</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="createTrigger" class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content rule-dialog-content">
+				<div class="modal-header confirm-dialog-header">
+					<a class="close confirm-dialog-close" data-dismiss="modal" ng-click="showEditCheckedDeviceType = false"></a>
+                    <label class="modal-title" id="myModalLabel">新建规则</label>
+				</div>
+				<div class="modal-body trigger-dialog-body">
+					<div class="trigger-step-1-header" ng-class="{'trigger-step-1-title':!unfoldDeviceType}" ng-click="recoverTriggerStep(triggerCurrentStep, 1)">1. 选择来源</div>
+					<div ng-if="!!showEditCheckedDeviceType" class="device-type-checked-copy device-type-checked-copy-move">
+						<div class="device-type-own-bg device-type-own-bg-active">
+							<div ng-class="{'device-type-own-icon-active':statusTagOption.value == 'OWN', 'device-type-follow-icon-active':statusTagOption.value == 'FOLLOWED'}"></div>
+						</div>
+					</div>
+					<div class="trigger-step-body trigger-step-1-body" ng-show="unfoldDeviceType">
+						<div class="trigger-device-type-own" ng-click="checkDeviceType('own')">
+							<div class="device-type-own-bg" ng-class="{'device-type-own-bg-active':checkedDeviceType == 'OWN'}">
+								<div class="device-type-own-icon" ng-class="{'device-type-own-icon-active':checkedDeviceType == 'OWN'}"></div>
+							</div>							
+							<label>我自己的设备</label>
+						</div>
+						<div class="trigger-device-type-follow" ng-click="checkDeviceType('follow')">
+							<div class="device-type-follow-bg" ng-class="{'device-type-follow-bg-active':checkedDeviceType == 'FOLLOWED'}">
+								<div class="device-type-follow-icon" ng-class="{'device-type-follow-icon-active':checkedDeviceType == 'FOLLOWED'}"></div>
+							</div>
+							<label>我关注的设备</label>
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div ng-show="showTriggerStepTwo">
+						<div class="trigger-step-2-header" ng-class="{'trigger-step-2-title':!unfoldDevice}" ng-click="recoverTriggerStep(triggerCurrentStep, 2)">2. 选择设备
+						</div>
+						<div ng-if="showEditCheckedDevice" class="edit-trigger-device-move" title="{{checkedDeviceItem.title}}">
+							<div class="trigger-device-img">
+								<img class="trigger-device-item-image" ng-src="{{imageBaseUrl | resetDeviceCover:checkedDeviceItem.imgPath}}" />
+							</div>
+							<div class="device-item-name">{{checkedDeviceItem.title}}</div>
+              			</div>
+						<div class="trigger-step-body trigger-step-2-body" ng-if="unfoldDevice">
+							<div ng-repeat="device in deviceList">
+								<div class="device-item" ng-class-even="'device-item-even'" ng-class="{'device-item-first-line':$first || $index == 1, 'device-item-active':$index == checkedDeviceItemIndex}" title="{{device.title}}" ng-click="checkDevice($index, device.id)">
+									<div class="trigger-device-img">
+										<img class="trigger-device-item-image" ng-src="{{imageBaseUrl | resetDeviceCover:device.imgPath}}" />
+									</div>
+									<div class="device-item-name">{{device.title}}</div>
+                      			</div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div ng-show="showTriggerStepThree">
+						<div class="trigger-step-3-header" ng-class="{'trigger-step-3-title':!unfoldSensor}" ng-click="recoverTriggerStep(triggerCurrentStep, 3)">3. 选择传感器
+						</div>
+						<div ng-if="showEditCheckedSensor" class="edit-trigger-sensor-move" title="{{checkedSensorItem.title}}">{{checkedSensorItem.title}}
+              			</div>
+						<div class="trigger-step-body trigger-step-3-body" ng-if="unfoldSensor">
+							<div ng-repeat="sensor in sensorList">
+								<div class="sensor-item" ng-class="{'sensor-item-first-row':$index % 5 == 0, 'sensor-item-first-line':$index < 5 && unfoldSensor, 'sensor-item-active':$index == checkedSensorItemIndex}" ng-click="checkSensor($index)" title="{{sensor.title}}">{{sensor.title}}</div>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div ng-show="showTriggerStepFour">
+						<div class="trigger-step-4-header">4. 确定数值</div>
+						<div class="trigger-step-body trigger-step-4-body" ng-show="unfoldValue">
+							<div ng-repeat="compareOption in compareOptions">
+								<div class="compare-item" ng-class="{'compare-item-first':$first, 'compare-item-active':$index == checkedCompareItemIndex}" ng-click="checkCompareItem($index)">{{compareOption.label}}</div>
+							</div>
+							<input class="input-value-text" type="text" ng-model="compareValue">
+							<label class="input-value-symbol">{{checkedSensorItem.properties.symbol}}</label>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="modal-footer trigger-step-operation">
+					<div class="trigger-step-handle">
+						<div class="process-prev-step process-prev-step-bg" ng-show="triggerCurrentStep > 1" title="上一步" ng-click="goTriggerPrevStep()">
+							<div class="process-step-icon process-prev-step-icon"></div>
+						</div>
+						<div class="process-next-step process-next-step-bg" title="下一步" ng-click="goTriggerNextStep()" ng-show="triggerCurrentStep < 4">
+							<div class="process-step-icon process-next-step-icon"></div>
+						</div>
+						<div class="process-next-step" ng-show="triggerCurrentStep == 4" ng-click="completeCreateTrigger()">
+							<div class="yes-no-icon yes-icon"></div>
+						</div>
+					</div>
+					<div class="trigger-step-progress">
+						<label class="process-current-step">{{triggerCurrentStep}}</label>
+						<label>/</label>
+						<label>4</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="createAction" class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content rule-dialog-content">
+				<div class="modal-header confirm-dialog-header">
+					<a class="close confirm-dialog-close" data-dismiss="modal"></a>
+                    <label class="modal-title" id="myModalLabel">新建动作</label>
+				</div>
+				<div class="modal-body trigger-dialog-body" ng-class="{'action-push-body':actionTypeOption.value == 'PUSH' || checkedActionType == 'PUSH'}">
+					<div class="action-step-1-header" ng-class="{'action-step-1-title':unfoldDiv != 'actionType'}" ng-click="recoverActionType()">1. 选择动作</div>
+					<div class="action-type-copy-move" ng-if="showActionTypeCopy">
+						<div class="action-type-bg action-type-bg-active">
+							<div class="action-type-icon" ng-class="{'action-type-email-icon-active':actionTypeOption.value == 'EMAIL', 'action-type-share-icon-active':actionTypeOption.value == 'SHARE', 'action-type-push-icon-active':actionTypeOption.value == 'PUSH'}"></div>
+						</div>
+					</div>
+					<div class="action-step-body action-step-1-body" ng-show="unfoldDiv == 'actionType'">
+						<div class="action-type-email" ng-click="checkActionType('EMAIL')">
+							<div class="action-type-bg" ng-class="{'action-type-bg-active':checkedActionType == 'EMAIL'}">
+								<div class="action-type-icon action-type-email-icon" ng-class="{'action-type-email-icon-active':checkedActionType == 'EMAIL'}"></div>
+							</div>							
+							<label>发送邮件</label>
+						</div>
+						<div class="action-type-share" ng-click="checkActionType('SHARE')">
+							<div class="action-type-bg" ng-class="{'action-type-bg-active':checkedActionType == 'SHARE'}">
+								<div class="action-type-icon action-type-share-icon" ng-class="{'action-type-share-icon-active':checkedActionType == 'SHARE'}"></div>
+							</div>
+							<label>分享到</label>
+						</div>
+						<div class="action-type-push" ng-click="checkActionType('PUSH')">
+							<div class="action-type-bg" ng-class="{'action-type-bg-active':checkedActionType == 'PUSH'}">
+								<div class="action-type-icon action-type-push-icon" ng-class="{'action-type-push-icon-active':checkedActionType == 'PUSH'}"></div>
+							</div>
+							<label>控制设备</label>
+						</div>
+					</div>
+					<div ng-show="showEmailContent">
+						<div class="email-content-header" ng-class="{'email-content-title':unfoldDiv != 'emailContent'}" ng-click="recoverEmailContent()">2. 输入内容</div>
+						<div class="action-step-body email-content-body" ng-show="unfoldDiv == 'emailContent'">
+							<textarea ng-model="emailContent" class="email-content-textarea" cols="55" rows="6" placeholder="请输入邮件内容，最多200字" maxlength="200"></textarea>
+						</div>
+						<div class="email-content-textarea-move" ng-if="showEmailContentCopy">
+							<div class="triangle-border tb-border"></div>
+  							<div class="triangle-border tb-background"></div>
+							<textarea ng-model="emailContent" class="email-content-textarea-body" cols="55" rows="8" disabled="disabled"></textarea>
+						</div>
+					</div>
+					<div ng-show="showEmailAddress">
+						<div class="email-address-header" ng-class="{'email-address-title':unfoldDiv != 'emailAddress'}">3. 发送到</div>
+						<div class="action-step-body email-address-body" ng-show="unfoldDiv == 'emailAddress'">
+							<input type="text" placeholder="请输入邮箱地址，多个邮箱用分号隔开" ng-model="inputEmailAddress"/>
+							<div class="history-email">
+								<div ng-repeat="emailAddress in emailAddressArr">
+									<div class="email-item" ng-class-even="'email-item-even'" ng-class="{'email-item-first-row': $index < 2, 'email-item-active': emailAddress.flag}" ng-click="checkEmail($index)">
+										<div class="email-item-name" title="{{emailAddress.email}}">{{emailAddress.email}}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div ng-show="showShareSocial">
+						<div class="share-social-header" ng-class="{'share-social-title':unfoldDiv != 'shareSocial'}" ng-click="recoverShareSocial()">2. 选择社交平台</div>
+						<div class="share-social" ng-show="unfoldDiv == 'shareSocial'">
+							<div class="share-weibo" title="分享到微博" ng-click="checkSocial('weibo')">
+								<div class="share-icon share-weibo-icon" ng-class="{'share-weibo-icon-active':checkedWeiboSocial}"></div>
+							</div>
+							<div class="share-qzone" title="分享到QQ空间" ng-click="checkSocial('qzone')">
+								<div class="share-icon share-qzone-icon" ng-class="{'share-qzone-icon-active':checkedQzoneSocial}"></div>
+							</div>
+						</div>						
+						<div class="share-weibo social-weibo-copy-move" title="分享到微博" ng-class="{'social-weibo-copy-both-move':checkedQzoneSocial}" ng-if="showWeiboSocialCopy">
+							<div class="share-icon share-weibo-icon" ng-class="{'share-weibo-icon-active':checkedWeiboSocial}"></div>
+						</div>
+						<div class="share-qzone social-qzone-copy-move" ng-class="{'social-qzone-copy-both-move':checkedWeiboSocial}" title="分享到QQ空间" ng-if="showQzoneSocialCopy">
+							<div class="share-icon share-qzone-icon" ng-class="{'share-qzone-icon-active':checkedQzoneSocial}"></div>
+						</div>
+					</div>
+					<div ng-show="showShareContent">
+						<div class="share-content-header" ng-class="{'share-content-title': unfoldDiv != 'shareContent'}">3. 输入内容</div>
+						<div class="action-step-body share-content-body" ng-show="unfoldDiv == 'shareContent'">
+							<textarea ng-model="shareContent" class="share-content-textarea" cols="55" rows="6" placeholder="请输入内容，最多200字" maxlength="200"></textarea>
+						</div>
+					</div>
+					<div ng-show="showControlDevice">
+						<div class="action-control-device-header" ng-class="{'action-control-device-title':!unfoldControlDevice}" ng-click="recoverControlDevice()">2. 选择设备
+						</div>
+						<div ng-if="showControlDeviceCopy" class="edit-trigger-device-move" title="{{controlDevice.title}}">
+							<div class="trigger-device-img">
+								<img class="trigger-device-item-image" ng-src="{{imageBaseUrl | resetDeviceCover:controlDevice.imgPath}}" />
+							</div>
+							<div class="device-item-name">{{controlDevice.title}}</div>
+              			</div>
+						<div class="action-step-body control-device-body" ng-if="unfoldControlDevice">
+							<div ng-repeat="controlDevice in controlDevices">
+								<div class="control-device-item" ng-class-even="'control-device-item-even'" ng-class="{'control-device-item-first-line':$first || $index == 1, 'control-device-item-active':$index == checkedControlDeviceIndex}" title="{{controlDevice.title}}" ng-click="checkControlDevice($index)">
+									<div class="trigger-device-img">
+										<img class="trigger-device-item-image" ng-src="{{imageBaseUrl | resetDeviceCover:controlDevice.imgPath}}" />
+									</div>
+									<div class="control-device-item-name">{{controlDevice.title}}</div>
+                      			</div>
+							</div>
+						</div>
+					</div>
+					<div ng-show="showControlUnit">
+						<div class="action-control-unit-header" ng-class="{'action-control-unit-title':!unfoldControlUnit}" ng-click="recoverControlUnit()">3. 选择控制单元</div>
+						<div class="device-control-copy edit-control-unit-copy" ng-if="showControlUnitCopy">
+							<div class="device-item-name">{{controlUnit.label}}</div>
+						</div>
+						<div class="action-step-body control-unit-body" ng-if="unfoldControlUnit">
+							<div ng-repeat="unit in controlDevice.units">
+                      			<div class="control-unit-item" ng-class-even="'control-unit-item-even'" ng-class="{'control-unit-item-first-line':$first || $index == 1, 'control-unit-item-active':$index == checkedControlUnitIndex}" title="{{unit.label}}" ng-click="checkControlUnit($index)">
+                      				<div class="control-unit-item-name">{{unit.label}}</div>
+                      			</div>
+							</div>
+						</div>
+					</div>
+					<div ng-show="showControlPanel">
+						<div class="action-control-panel-header" ng-class="{'action-control-panel-title':!unfoldControlPanel}" ng-click="recoverControlPanel()">4. 选择控制面板</div>
+						<div class="device-control-copy edit-control-panel-copy" ng-if="showControlPanelCopy">
+							<div class="device-item-name">{{controlPanel.label}}</div>
+						</div>
+						<div class="action-step-body control-panel-body" ng-if="unfoldControlPanel">
+							<div ng-repeat="panel in controlUnit.panels">
+								<div class="device-item" ng-class-even="'device-item-even'" ng-class="{'device-item-first-line':$first || $index == 1, 'control-panel-item-active':$index == checkedControlPanelIndex}" ng-click="checkControlPanel($index)" title="{{panel.label}}">
+                      				<div class="device-item-name">{{panel.label}}</div>
+                      			</div>
+							</div>
+						</div>
+					</div>
+					<div ng-show="showControlElement">
+						<div class="action-control-element-header" ng-class="{'action-control-element-title':!unfoldControlElement}" ng-click="recoverControlElement()">5. 选择控制元素</div>
+						<div class="device-control-copy edit-control-element-copy" ng-if="showControlElementCopy">
+							<div class="device-item-name">{{controlElement.label}}</div>
+						</div>
+						<div class="action-step-body control-element-body" ng-if="unfoldControlElement && controlElement.type != 'button'">
+							<div ng-repeat="element in controlElements">
+								<div class="device-item" ng-class-even="'device-item-even'" ng-class="{'device-item-first-line':$first || $index == 1, 'control-element-item-active':$index == checkedControlElementIndex}" ng-click="checkControlElement($index)" title="{{element.label}}">
+									<div class="device-item-name">{{element.label}}</div>
+								</div>
+							</div>
+						</div>
+						<div class="action-step-body control-element-body" ng-if="unfoldControlElement && controlElement.type == 'button'">
+							<div ng-repeat="element in controlElements">
+								<div class="sensor-item" ng-class="{'sensor-item-first-row':$index % 5 == 0, 'device-control-button-active': $index == checkedControlElementIndex}" value="{{element.path}}" ng-click="checkControlElement($index)">{{element.label}}</div>
+							</div>
+						</div>
+					</div>
+					<div ng-show="showControlValue">
+						<div class="action-control-element-header">6. 确定元素值</div>
+						<div class="action-step-body control-value-body" ng-if="unfoldControlValue && controlElement.type == 'spinner_enum'">
+							<div ng-repeat="constraint in controlElement.constraint">
+								<div class="sensor-item" ng-class="{'sensor-item-first-row':$index % 5 == 0, 'sensor-item-first-line':$index < 5 && unfoldSensor, 'control-value-item-active':$index == checkedControlValueIndex}" ng-click="checkControlValue($index)" path="{{controlElement.path}}" title="{{constraint.label}}" value="{{constraint.value}}">{{constraint.label}}</div>
+							</div>
+						</div>
+						<div class="action-step-body control-value-body" ng-if="unfoldControlValue && controlElement.type == 'slider'">
+							<div class='control-element-container'>
+								<div linkx-slider class="{{elementTypeClass}}" min='controlElement.min' max='controlElement.max' increment='controlElement.increment' value="{{tempValue}}" path='controlElement.path'></div>
+								<div class='slider-label'>
+									<span>{{controlElement.unit}}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer trigger-step-operation">
+					<div class="trigger-step-handle">
+						<div class="process-prev-step process-prev-step-bg" title="上一步" ng-click="goActionPrevStep()" ng-show="actionCurrentStep > 1">
+							<div class="process-step-icon process-prev-step-icon"></div>
+						</div>
+						<div class="process-next-step process-next-step-bg" title="下一步" ng-click="goActionNextStep()" ng-show="!actionStepNum || actionCurrentStep < actionStepNum">
+							<div class="process-step-icon process-next-step-icon"></div>
+						</div>
+						<div class="process-next-step" ng-show="actionCurrentStep == actionStepNum" ng-click="completeCreateAction()">
+							<div class="yes-no-icon yes-icon"></div>
+						</div>
+					</div>
+					<div class="trigger-step-progress" ng-show="false">
+						<label class="process-current-step">{{actionCurrentStep}}</label>
+						<label ng-show="!!actionStepNum">/</label>
+						<label>{{actionStepNum}}</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

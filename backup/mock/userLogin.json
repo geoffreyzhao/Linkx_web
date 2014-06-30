@@ -1,0 +1,10 @@
+{
+    "code": 200,
+    "url": "/home",
+    "message": "Welcome",
+    "data": {
+        "userName": "TestUser",
+        "apikey": "abc123hdjs234hus732u",
+        "id": "dsahsg277d8eg3f6rqdfw"
+    }
+}

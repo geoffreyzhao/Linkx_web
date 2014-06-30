@@ -1,0 +1,22 @@
+<div class="device-detail-image mydevice-image">
+
+    <div id="mylinkx_own_detail_image" ng-class="{'device-image-carousel': (imgPath.length > 0)}" ng-if="!!imgPath.length" class="device-detail-images carousel slide" data-ride="carousel">
+        <div class="carousel-inner" style="position:relative;">
+            <div class="item" ng-repeat="i in imgPath track by $index" ng-class="{'active': ($index == 0)}">
+                <img title="{{tip}}" style="width:300px;height:200px;" ng-click="viewOriginal($event, $index)" ng-src="{{imageBaseUrl}}{{i | deviceCover}}"/>
+                <span style="display: none;">{{$index + 1}}</span>
+            </div>
+        </div>
+        <a class="left carousel-control" style="background:none;" data-target="#mylinkx_own_detail_image" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" style="background:none;" data-target="#mylinkx_own_detail_image" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+    <div style="width:300px;height:200px;position:absolute;top:0;left:0;line-height:200px;text-align:center;" ng-if="!imgPath.length">
+      <img src="images/mylinkx/default_item.png"/>
+    </div>
+
+    <span style="position:absolute;bottom:40px;line-height:20px;display:inline-block;width:100%;left:0;">{{currentImgIndex}} / {{imgPath.length}}</span>
+</div>

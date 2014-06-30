@@ -1,0 +1,52 @@
+{
+    "code": 200,
+    "message": "Request has been processed successfully",
+    "data": [
+        {
+            "id": "device_001",
+            "title": "device 1",
+            "badge": 12,
+            "status": "ONLINE",
+            "actions": 3,
+            "follows": 19,
+            "position":"上海",
+            "isExposed":1,
+            "latitude" : 31.208093,
+            "longitude" : 121.659009,
+            "placeType":"INSIDE",
+            "type":"OWN_DEVICE",
+            "description":"test1",
+            "tags":"tag1,tag2,tag3"
+        }, {
+            "id": "device_002",
+            "title": "device 2",
+            "badge": 0,
+            "status": "OFFLINE",
+            "actions": 1,
+            "follows": 28,
+            "position":"北京",
+            "isExposed":1,
+            "latitude" : 31.208154,
+            "longitude" : 121.651032,
+            "placeType":"INSIDE",
+            "type":"OWN_DEVICE",
+            "description":"test2",
+            "tags":"tag1,tag2,tag3"
+        }, {
+            "id": "device_003",
+            "title": "device 3",
+            "badge": 5,
+            "status": "ONLINE",
+            "actions": 9,
+            "follows": 220,
+            "position":"北京",
+            "isExposed":0,
+            "latitude" : 31.216431,
+            "longitude" : 121.658937,
+            "placeType":"OUTSIDE",
+            "type":"LINKX_DEVICE",
+            "description":"test3",
+            "tags":"tag1,tag2,tag3"
+        }
+    ]
+}

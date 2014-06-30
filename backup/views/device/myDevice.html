@@ -1,0 +1,42 @@
+﻿<div bs-tabs ng-controller="myDeviceController" class="find-device-wrapper">
+    <div data-title="{{resourceBundle.deviceTabName}}" ng-controller="devicesController">
+        <div class="container-fluid deviceView">
+            <div class="row-fluid">
+                <!-- List view -->
+                <div class="span3">
+                    <div ng-include src="'views/device/deviceList.html'">
+                    </div>
+                </div>
+                <div class="span9" id="device-right">
+                    <div ng-show="!showAddDeviceView"><!--Device detail view -->
+                        <div ng-show="!showAddSensorView">
+                            <div ng-include src="'views/device/deviceDetail.html'"
+                                class="clearfix"></div>
+                            <hr class="hr-margin">
+                            <div ng-include src="'views/sensor/sensorList.html'"></div>
+                        </div>
+                        <div ng-show="showAddSensorView" ng-include src="'views/sensor/addSensor.html'"></div>
+                    </div>
+                    <div ng-show="showAddDeviceView"><!-- Add Device view -->
+                        <div ng-include src="'views/device/addDevice.html'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div data-title="{{resourceBundle.actionTabName}}" ng-controller="actionController">
+        <div class="container-fluid actionView">
+            <div class="row-fluid">
+                <div class="span3">
+                    <div ng-include src="'views/action/actionList.html'" >
+                    </div>
+                </div>
+                
+                <div class="span9">
+                    <div ng-include src="'views/action/actionDetail.html'" ng-show="showDetail"></div>
+                    <div ng-include src="'views/action/addAction.html'" ng-show="showAddAction"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

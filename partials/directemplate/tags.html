@@ -1,0 +1,8 @@
+<div class="device-tags-container" ng-if="tags.length <= 1"  ng-repeat="tag in tags">
+    <input id="device-tags-1" class="device-tags mylinkx-form-control" type="text" placeholder="{{i18n('device_tag_placeHolder')}}" ng-model="tag.value" ng-blur="verifyTags(tag.value,'single')" >
+</div>
+<div class="device-tags-container" ng-show="tags.length > 1" ng-repeat="tag in tags">
+    <input id="device-tags{{$index}}" class="device-tags mylinkx-form-control" ng-focus="changeFocus($index);" ng-class="{'error': verifyTags(tag.value)}" ng-blur="changeFocus(-1);" type="text" placeholder="{{i18n('device_tag_placeHolder')}}" ng-model="tag.value" >
+    <div ng-if="focusIndex == $index" ng-mousedown="delTag($index,$event)" type="button" class="remove-icon remove-plus-icon"></div>
+</div>
+<div ng-mousedown="addTag($event)" class="plus-icon remove-plus-icon"></div>

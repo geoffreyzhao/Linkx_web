@@ -1,0 +1,1 @@
+function GBrowserIsCompatible() {return false;}alert("This web site needs a different Google Maps API key. A new key can be generated at http://code.google.com/apis/maps/documentation/javascript/v2/introduction.html#Obtaining_Key.");function GUnload() {}var G_API_VERSION;

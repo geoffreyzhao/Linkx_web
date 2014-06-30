@@ -1,0 +1,62 @@
+<div ng-controller="followsDataCategoryCtrl">
+    <a  class="title-list-container" href="#/user_mylinkx/followsdata" ng-show="!searchTag">
+      <label class="cursor-pointer">{{i18n('menu.my_follow_data')}}</label>
+      <span class="my-follow-data-count cursor-pointer" title="我关注的数据数量">{{myFollowedDataList.length}}</span>
+    </a>
+    <a  class="title-list-container" ng-show="searchTag">
+      <label >{{i18n('menu.my_follow_data')}}</label>
+      <span class="my-follow-data-count" title="我关注的数据数量">{{myFollowedDataList.length}}</span>
+    </a>
+    <a class="more" ng-show="!searchTag && (myFollowedDataList.length > 3) && !currentCategory" 
+            style="display:block;" href="#/user_mylinkx/followsdata">
+        <div class="cursor-pointer more-icon"></div>
+    </a>
+    <div>
+        <div class="list-item-block cursor-pointer col-md-4" ng-repeat="item in myShowFollowedDataList" ng-click="getFollowedDataDetail(item, $index)">
+            <div id="followedData{{item.id}}" ng-class="{'show-carousel': ((!!item.data) && (item.data.length > 0))}" class="list-item-content followed-data-carousel carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="item" ng-repeat="i in item.data" ng-class="{'active': ($index === 0)}">
+                        <p class="follow-data-tag-item-title"><span>{{i.tag}}</span></p>
+                        <div class="follow-data-tag-container">
+                            <div class="follow-data-tag-item-val" ng-if="true">
+                                <span>{{i.val ? i.val : i18n("common.no_data")}}</span>
+                            </div>
+                            <div class="follow-data-tag-item-val" ng-if="false">
+                                <img ng-src="{{imageBaseUrl}}{{i.val}}"/>
+                            </div>
+                            <div class="follow-data-tag-item-time">
+                                <span>{{i.timestamp | date: 'yyyy/MM/dd HH:mm' }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="title-block" ng-if="!searchTag">
+                <span class="item-title followed-item-title" title="{{item.title}}">{{item.title}}</span>
+            </div>
+            <div class="item-desc" title="{{item.tag}}" ng-if="!searchTag">{{item.tag}}</div>
+            <div class="searchShowItem" ng-if="!!searchTag">
+              <div class="title-block">
+                  <div class="item-title my-device-title" title="{{item.title}}">
+                    <div ng-bind-html="item.searchTitle | to_trusted"></div>
+                  </div>
+              </div>
+              <div class="item-desc" title="{{item.tag}}">
+                  <div ng-bind-html="item.searchTag | to_trusted"></div>
+              </div>
+            </div>
+            <div class="list-item-bottom-block">
+                <div class="status-icon online-offline-icon" title="{{i18n(!!item.status ? 'ONLINE' : 'OFFLINE')}}" ng-class="{'online-icon': item.status, 'offline-icon' : !item.status}"></div>
+                <div class="list-item-sub-block" style="width: 160px;">
+                    <div class="list-item-bottom-icon item-trigger-num" title="{{i18n('trigger_num')}}" style="margin-left:50px;"></div>
+                    <span>{{item.triggerNum || 'N/A'}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="loading-img-block display-none">
+            <img class="datapoint-loading-img" ng-show = "!data.value" ng-src="{{consts.loadingImage}}">
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+</div>

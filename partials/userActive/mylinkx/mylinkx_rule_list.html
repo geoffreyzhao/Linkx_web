@@ -1,0 +1,66 @@
+<div class="mylinkx-rule-list" ng-controller="ruleListCtrl">
+	<div class="search-rule-block">
+		<input type="text" ng-model="filterRuleCondition" placeholder="Filter by keyword" class="keyword-filter-input" ng-keypress="filterRuleByKeypress($event);" ng-keyup="filterRule()">
+		<div class="rule-list-icon keyword-clear-icon" ng-show="filterRuleCondition != ''" ng-click="clearKeyword()"></div>
+		<div class="rule-list-icon keyword-filter-icon" ng-click="filterRule()"></div>
+	</div>
+	<div class="rule-order-condition rule-order-normal" ng-class="{'rule-order-active':orderFlagByExecuteTimes!=''}">
+		<label ng-click="orderRule('executeTimes')" ng-class="{'rule-order-condition-title':orderFlagByExecuteTimes!=''}">按触发次数排序</label>
+		<div class="rule-order-icon">
+			<div class="rule-list-icon order-icon" ng-class="{'asc-normal-icon':orderFlagByExecuteTimes!='asc', 'asc-active-icon':orderFlagByExecuteTimes=='asc'}"></div>
+			<div class="rule-list-icon order-icon" ng-class="{'desc-normal-icon':orderFlagByExecuteTimes!='desc', 'desc-active-icon':orderFlagByExecuteTimes=='desc'}"></div>
+		</div>
+	</div>
+	<div class="rule-order-condition rule-order-normal" ng-class="{'rule-order-active':orderFlagByLastExecuteTime!=''}">
+		<label ng-click="orderRule('lastExecuteTime')" ng-class="{'rule-order-condition-title':orderFlagByLastExecuteTime!=''}">按触发时间排序</label>
+		<div class="rule-order-icon">
+			<div class="rule-list-icon order-icon" ng-class="{'asc-normal-icon':orderFlagByLastExecuteTime!='asc', 'asc-active-icon':orderFlagByLastExecuteTime=='asc'}"></div>
+			<div class="rule-list-icon order-icon" ng-class="{'desc-normal-icon':orderFlagByLastExecuteTime!='desc', 'desc-active-icon':orderFlagByLastExecuteTime=='desc'}"></div>
+		</div>
+	</div>
+
+	<a class="add-rule-btn operator-signal-item-icon" href="#/user_mylinkx/rulelist/new" ng-show="showRuleList" title="新建规则"></a>
+
+	<div class="rule-list">
+	<table class="rule-list-table">
+		<tr ng-repeat="displayRule in ruleListBySearch">
+			<td class="action-status-td">
+				<div ng-class="{'online-offline-icon offline-icon':displayRule.ruleStatus=='OFFLINE', 'online-offline-icon online-icon':displayRule.ruleStatus=='ONLINE', 'status-icon-disable':displayRule.ruleStatus=='DISABLE'}" title="{{displayRule.ruleStatus}}"></div>
+			</td>
+			<td class="action-content-td">
+          <div ng-bind-html="displayRule.ruleContent | to_trusted">
+			</td>
+			<td class="trigger-counter-td">
+				<div class="action-trigger-counter">{{displayRule.executeTimes}}</div>
+			</td>
+			<td class="trigger-time-td">
+				<div class="action-trigger-time">{{displayRule.lastExecuteTime}}</div>
+			</td>
+			<td class="action-trigger-operation">
+				<a class="rule-list-icon action-trigger-edit-icon" ng-href="#/user_mylinkx/rulelist/{{displayRule.id}}" title="编辑"></a>
+				<div class="rule-list-icon action-trigger-delete-icon"
+					ng-click="prepareDel(displayRule.id);"
+				data-toggle="modal" data-target="#delRuleModal" title="删除"></div>
+
+			</td>
+		</tr>
+	</table>
+	</div>
+	<div id="delRuleModal" class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header confirm-dialog-header">
+                    <a class="close confirm-dialog-close" data-dismiss="modal"></a>
+                    <label class="modal-title" id="myModalLabel">删除规则确认</label>
+                </div>
+                <div class="modal-body confirm-dialog-body">
+                    是否确定删除当前规则?
+                </div>
+                <div class="modal-footer confirm-dialog-footer">
+					<div class="yes-no-icon yes-icon" data-dismiss="modal" ng-click="delRule(readyDeleteRule.id)"></div>
+					<div class="yes-no-icon no-icon" data-dismiss="modal"></div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>

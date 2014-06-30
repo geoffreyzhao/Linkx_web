@@ -1,0 +1,55 @@
+<div ng-controller="triggerController" style="margin-left: 10px">
+<div class="sensor-triggerList">
+    <h5>触发动作</h5>
+    <ul>
+        <li ng-repeat="trigger in triggerListArray[sensor.id]">
+        {{trigger.name}}
+        <span>
+            <img alt="编辑" id="editTrigger" ng-click="showEditTrigger(sensor.id, trigger);" src="css/img/edit.png"></img>
+            <img alt="删除" id="deleteTrigger" ng-click="removeTrigger(trigger.id, sensor.id);" src="css/img/delete.png"></img>
+        </span>
+        </li>
+    </ul>
+</div>
+<div class="sensor-dp-trigger">
+    <a href="" ng-click="showAddTrigger(sensor.id);">增加触发</a>
+</div>
+<div class="sensor-addTrigger" id="sensor-addTrigger{{sensor.id}}">
+    <ul>
+        <li><h6>一个新的触发动作</h6></li>
+        <li>
+            <h6>当满足下面条件时</h6>
+            <select id="tri_operator" ng-model="triggerType" name="tri_operator" class="small-input">
+                  <option value="BIGGER">&gt;</option>
+                  <option value="BIGGER_EQUAL">≥</option>
+                  <option value="SMALLER">&lt;</option>
+                  <option value="SMALLER_EQUAL">≤</option>
+                  <option value="EQUAL">==</option>
+            </select>
+            <input id="triggerValue" type="text" ng-model="triggerValue">
+        </li>
+        <li>
+            <h6>指定动作</h6>
+            <div>
+                <select id="action_id" ng-model="actionId" ng-options="action.id as action.name for action in actionList">
+                </select>
+            </div>
+            <small>若没有动作可选, 请到 我的设备&gt;&gt;动作管理 中添加</small>
+        </li>
+        <li>
+            <h6>消息内容 (限长120个字)</h6>
+            <div>
+                <textarea id="tri_msg" ng-model="content" cols="30" rows="4" style="width: 100%;"></textarea>
+            </div>
+            <small>当上面指定的事件被触发时, 该消息将被发送.<br>
+                如果指定动作为开关，消息内容格式为"{"value":值}"，值为"OFF"表示关闭，值为"ON"表示打开. <br>
+                如果指定动作为传感器，消息内容自定义，用$value可以获取当前value值，若要$value保持原样，则用两个以上的"$"，如$$value.
+            </small>
+        </li>
+        <li>
+            <input ng-click="addTrigger(sensor.id);" class="btn btn-success" type="submit" value="√ 保存为一个新的触发动作">
+            <input class="btn btn-danger" ng-click="showAddTrigger(sensor.id);" type="submit" value="X 放弃">
+        </li>
+    </ul>
+</div>
+</div>

@@ -1,0 +1,38 @@
+<div class="login-wrapper unsignin-wrapper">
+    <div class="mylinkx-title-container">
+        <div class="title-trapezoid"></div>
+        <div class="title-content">
+            <label>登录LinkX系统</label>
+            <div class="title-bottom"></div>
+        </div>
+    </div>
+    <form class="mylinkx-login-form" ng-submit="login()">
+        <div class="login-row">
+            <div class="login-icon login-email-icon"><span>邮箱</span></div>
+            <input
+                type="email"
+                id="email" class="login-form-control"
+                placeholder="{{i18n('userlogin.email.placeholder')}}"
+                ng-model="form.email" required/>
+            <div class="clearfix"></div>
+        </div>
+        <div class="login-row">
+            <div class="login-icon login-psd-icon"><span>密码</span></div>
+            <input
+                type="password"
+                id="password" class="login-form-control"
+                placeholder="{{i18n('userlogin.password.placeholder')}}"
+                ng-model="form.password" required/>
+            <div class="clearfix"></div>
+        </div>
+        <div class="login-row" style="line-height: 40px;text-align: left;">
+            <span ng-init="from.remember = false" ng-click="form.remember = !form.remember" ng-class="{active: !!form.remember}" class="login-remember cursor-pointer"
+                ng-model="form.remember"></span>
+            <span class="cursor-pointer" tooltip="{{i18n('userlogin.remember.tooltip')}}" ng-click="form.remember = !form.remember" tooltip-placement="right">{{i18n('userlogin.remember')}}</span>
+            <a href="#/get_password" class="login-forget-psd">{{i18n('userlogin.forget')}}</a>
+        </div>
+        <button type="submit" class="login-button">{{i18n('userlogin.login')}}</button>
+    </form>
+    <a href="#/user_register" class="login-register">还没有账号?马上注册!</a>
+    <div class="footer-wrapper" ng-include="partials.footer"></div>
+</div>

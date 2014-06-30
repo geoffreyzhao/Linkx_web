@@ -1,0 +1,8 @@
+<div ng-controller="accountMenuController" class="accountMenu">
+    <div>
+        <ul class="nav nav-list"><!-- list -->
+            <li ng-class="{'active':showAccountMenu == 'userInfo'}" ng-click="oper.showUserInfo()"><a >帐户设置</a></li>
+            <li ng-class="{'active':showAccountMenu == 'changePassword'}" ng-click="oper.showChangePassword()"><a >修改密码</a></li>
+        </ul>
+    </div>
+</div>

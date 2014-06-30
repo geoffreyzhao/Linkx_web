@@ -1,0 +1,27 @@
+{
+    "code": 200,
+    "message": "Request has been processed successfully",
+    "data": [
+        {
+            "id": "follow_data_001",
+            "title": "follows data 1",
+            "badge": 4
+        }, {
+            "id": "follow_data_002",
+            "title": "follows data 2",
+            "badge": 1
+        }, {
+            "id": "follow_data_003",
+            "title": "follows data 3",
+            "badge": 0
+        }, {
+            "id": "follow_data_004",
+            "title": "follows data 4",
+            "badge": 0
+        }, {
+            "id": "follow_data_005",
+            "title": "follows data 5",
+            "badge": 0
+        }
+    ]
+}

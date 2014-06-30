@@ -1,0 +1,14 @@
+<div ng-controller="actionListController">
+    <div class="clearfix">
+        <div>
+            <input type="text" class="searchInput input-xlarge">
+        </div>
+        <div id="addAction" class="btn btn-info pull-right" ng-click="showAddActionView();">+</div>
+    </div>
+    <hr>
+    <div>
+        <ul id="actionList" class="nav nav-list" list>
+            <li ng-repeat="action in actionList" ng-click="selectAction();" name="{{device.id}}"><a href="" ng-bind="action.name"></a></li>
+        </ul>
+    </div>
+</div>

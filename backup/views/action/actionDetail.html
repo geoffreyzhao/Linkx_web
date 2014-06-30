@@ -1,0 +1,62 @@
+<div ng-controller="actionDetailController">
+    <form class="form-horizontal">
+    <h2>动作详情</h2>
+    <div class="control-group">
+        <label class="control-label">名称</label>
+        <div class="controls">
+            <label class="control-label actioninfo-item">{{selectedAction.name}}</label>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">类型</label>
+        <div class="controls">
+            <label class="control-label actioninfo-item">{{selectedAction.actionType}}</label>
+        </div>
+    </div>
+    
+    <div class="control-group" ng-show="showEmail">
+        <label class="control-label">邮箱地址</label>
+        <div class="controls">
+            <label class="control-label actioninfo-item">{{selectedAction.email}}</label>
+        </div>
+    </div>
+    
+    <div class="control-group" ng-show="showWeibo">
+        <label class="control-label">微博提供方</label>
+        <div class="controls">
+            <label class="control-label actioninfo-item">{{selectedAction.provider}}</label>
+        </div>
+    </div>
+    
+    <div class="control-group" ng-show="showPush">
+        <label class="control-label">推送类型</label>
+        <div class="controls">
+            <label class="control-label actioninfo-item">{{selectedAction.pushType}}</label>
+        </div>
+    </div>
+    
+    <div class="control-group" ng-show="showPush && selectedAction.pushType=='PUSHTO_WEBSITE'">
+        <label class="control-label"></label>
+        <div class="controls">
+            <label class="control-label actioninfo-item">{{selectedAction.pushWebsite}}</label>
+        </div>
+    </div>
+    
+    <div class="control-group" ng-show="showPush && selectedAction.pushType=='PUSHTO_SENSOR'">
+        <label class="control-label"></label>
+        <div class="controls">
+            <label class="control-label actioninfo-item">{{selectedAction.switchSensor.title}}</label>
+        </div>
+    </div>
+    
+    <div class="control-group">
+    <label class="control-label"></label>
+    <div class="controls">
+        <div class="action-oper">
+            <button class="btn btn-success" ng-click="showUpdateActionView();">编辑</button>
+            <button class="btn btn-danger" ng-click="removeAction();">移除</button>
+        </div>
+    </div>
+    </div>
+    </form>
+</div>

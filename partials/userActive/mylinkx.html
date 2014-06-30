@@ -1,0 +1,93 @@
+<div class="mylinkx">
+
+    <div class="category-panel" ng-show="!searchTag">
+
+        <div class="search-block">
+                <input type="text" ng-model="searchKey" ng-keydown="keySearchDevice($event);">
+                <div class="border-radius-category-img search-img cursor-pointer" ng-click="searchDevice();"></div>
+        </div>
+        <div class="panel-group" id="accordion"  collapse-switcher>
+            <a class="mydevice category cursor-pointer" ng-href="{{'#/user_mylinkx/mydevice' | userLoginFilter}}"    ng-class="{'category-active':currentCategory=='mydevice'}">
+                <div class="border-radius-category-img category-my-device-img" ></div>
+                <div class="category-title" ng-class="{'display-none':currentCategory!='mydevice'}" >{{i18n(category['mydevice'].title)}}</div>
+            </a>
+
+            <a class="followsdevice category cursor-pointer"  ng-href="{{'#/user_mylinkx/followsdevice' | userLoginFilter}}" ng-class="{'category-active':currentCategory=='followsdevice'}">
+                <div class="border-radius-category-img category-follow-device-img"></div>
+                <div class="category-title" ng-class="{'display-none':currentCategory!='followsdevice'}">{{i18n(category['followsdevice'].title)}}</div>
+            </a>
+
+            <a class="followsdata category cursor-pointer" ng-href="{{'#/user_mylinkx/followsdata' | userLoginFilter}}" ng-class="{'category-active':currentCategory=='followsdata'}">
+                <div class="border-radius-category-img category-follow-data-img" ></div>
+                <div class="category-title" ng-class="{'display-none':currentCategory!='followsdata'}">{{i18n(category['followsdata'].title)}}</div>
+            </a>
+
+            <a class="followsdata category cursor-pointer" ng-href="{{'#/user_mylinkx/rulelist' | userLoginFilter}}"  ng-class="{'category-active':currentCategory=='rulelist'}">
+                <div class="border-radius-category-img trigger-title-normal-icon" ng-class="{'trigger-title-active-icon':currentCategory=='rulelist'}"></div>
+                <div class="category-title" ng-class="{'display-none':currentCategory!='rulelist'}">触发动作</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="search-menu-bar" ng-show="searchTag">
+        <div class="search-key-result">
+            关键字<div class="search-key-src-block">"<div class="search-highlight search-key-src" ng-bind="searchKey"></div>"</div>
+            <div class="search-num-block">共<span>{{searchNum}}</span>条结果</div>
+        </div>
+        <div class="search-detail-result">
+            <div>其中</div>
+            <div ng-click="goSpecifiedResult('myDevice');"><span class="cursor-pointer">[我自己的设备]</span>里有<label>{{searchMyDeviceNum}}</label>条</div>
+            <div ng-click="goSpecifiedResult('myFollowedDevice');"><span class="cursor-pointer">[我关注的设备]</span>里有<label>{{searchFollowDeviceNum}}</label>条</div>
+            <div ng-click="goSpecifiedResult('myFollowedData');"><span class="cursor-pointer">[我关注的数据]</span>里有<label>{{searchFollowDataNum}}</label>条</div>
+        </div>
+    </div>
+
+    <!-- Normal Breadcrumb -->
+    <ul class="clearfix my-linkx-breadcrumb" ng-show="!searchTag">
+        <li class="first-item" ng-class="{'current': !currentCategory && !currentItem}">
+            <a ng-href="{{'#/user_mylinkx' | userLoginFilter}}">{{i18n('breadcrumb_parent')}}</a><i></i></li>
+        <li class="my-linkx-breadcrumb-split" ng-show="!!currentCategory && !!currentItem" >
+            <img src="images/mylinkx/icon_arrow_crumb.png"/>
+        </li>
+        <li ng-show="currentCategory" ng-class="{'current': currentCategory && !currentItem}">
+            <a ng-href="#/user_mylinkx/{{currentCategory | userLoginFilter}}">{{i18n(currentCategory)}}</a><i></i></li>
+        <li class="last-item" ng-show="!!currentItem" ng-class="{'current': !!currentItem}">{{showAddDevice||showAddRule ? i18n(currentItem) : currentItem}}<i></i></li>
+    </ul>
+
+    <div class="clearfix my-linkx-breadcrumb search-block-after" ng-show="searchTag">
+        <input type="text" ng-keydown="keySearchDevice($event);" placeholder="请输入搜索关键字" type="search" ng-model="searchKey"/>
+        <div class="border-radius-category-img search-img cursor-pointer" ng-click="searchDevice();"></div>
+    </div>
+
+    <div class="mylinkx-right-container" >
+        <div class="mylinkx-right-content-background" ></div>
+        <div data-target="#navbarSearch" class="scrollspy-search" style="overflow:auto;height:100%;padding-left: 10px;min-width: 1030px;">
+            <div style="min-height:calc(100% - 160px);">
+                <div class="own-device-wrapper" ng-include="partials.mylinkx_own_detail" ng-controller="myDeviceDetailCtrl" ng-show="!!showDeviceDetail"></div>
+
+                <div class="my_attention-wrapper" ng-include="partials.mylinkx_data_detail" ng-controller="followDataDetailCtrl" ng-show="(!showAddDevice && !showEditDevice) && (currentCategory === 'followsdata') && !!currentItem"></div>
+
+                <div class="my_attention-wrapper" ng-include="partials.mylinkx_device_add" ng-controller="addMyDeviceCtrl" ng-show="!!showAddDevice || !!showEditDevice"></div>
+                <div ng-show="!!editRuleFlag || !!addRuleFlag" ng-include="partials.mylinkx_rule_add"></div>
+
+                <div id="mydevice-block" class="title-row" ng-show="(!showAddDevice && !showEditDevice) && (currentCategory === 'mydevice' || !currentCategory) && !currentItem">
+                    <div id="myDevice" class="own-device-wrapper" ng-include="partials.mylinkx_own" ></div>
+                </div>
+
+                <div id="followdevice-block" class="title-row" ng-show="(!showAddDevice && !showEditDevice) && (currentCategory ==='followsdevice' || !currentCategory) && !currentItem">
+                    <div id="myFollowedDevice" class="my_attention-wrapper" ng-include="partials.mylinkx_follows_device" ></div>
+                </div>
+
+                <div id="followdata-block" class="title-row" ng-show="(!showAddDevice && !showEditDevice) && (currentCategory === 'followsdata' || !currentCategory) && !currentItem">
+                    <div id="myFollowedData" class="my_attention-wrapper" ng-include="partials.mylinkx_follows_data"></div>
+                </div>
+                 <div ng-show="currentCategory=='rulelist' && !!showRuleList" class="showRuleList">
+                    <label>触发动作</label>
+                    <div ng-include="partials.mylinkx_rule_list"></div>
+                 </div>
+             </div>
+            <div class="footer-wrapper" ng-include="partials.footer"></div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

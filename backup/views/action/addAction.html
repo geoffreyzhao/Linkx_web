@@ -1,0 +1,65 @@
+<div ng-controller="actionAddController" >
+    <form class="form-horizontal action-form">
+        <div class="breadcrumb">
+            <span ng-show="isAdd">添加新动作</span>
+            <span ng-show="!isAdd">更新动作</span>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputName">动作名</label>
+            <div class="controls">
+                <input type="text" id="inputName" ng-model="action.name" placeholder="动作名不得少于3个字">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="selectType">类型</label>
+            <div class="controls">
+                <select class="span10" ng-model="action.actionType" ng-options="t.value as t.name for t in types" data-style="btn-primary" bs-select>
+                </select>
+            </div>
+        </div>
+        <div class="control-group" ng-show="showEmail">
+            <label class="control-label" for="inputEmail">邮箱地址</label>
+            <div class="controls">
+                <input type="email" id="inputEmail" ng-model="action.email" placeholder="请输入正确的邮箱地址">
+            </div>
+        </div>
+        <div class="control-group" ng-show="showWeibo">
+            <label class="control-label" for="selectWeibo">微博类型</label>
+            <div class="controls">
+                <select class="span10" ng-model="action.weibo" ng-options="w.value as w.name for w in weibos" data-style="btn-primary" bs-select>
+                </select>
+            </div>
+        </div>
+        <div class="control-group" ng-show="showWebsite">
+            <label class="control-label" for="selectType"></label>
+            <div class="controls">
+                <label class="radio" style="float: left;line-height: 25px;">
+                  <input type="radio" name="websiteType" ng-model="action.pushType" id="optionsRadios1" value="PUSHTO_SENSOR" checked>
+                  推送到开关
+                </label>
+                <label class="radio" style="float: left;line-height: 25px;margin-top: 5px;">
+                  <input type="radio" name="websiteType" ng-model="action.pushType" id="optionsRadios1" value="PUSHTO_WEBSITE" checked>
+                  推送到网址
+                </label>
+            </div>
+        </div>
+        <div class="control-group" ng-show="showWebsite">
+            <label class="control-label" for="inputURL"></label>
+            <div class="controls" ng-show="!showSensor">
+                <input type="url" id="inputURL" placeholder="请输入正确的网址地址" ng-model="action.pushWebsite">
+            </div>
+            <div class="controls" ng-show="showSensor">
+                <select class="span10" ng-model="action.switchSensor.id" ng-options="switch.id as switch.title for switch in switchSensors" data-style="btn-primary" bs-select>
+                </select>
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <div class="controls">
+                <button class="btn btn-info" ng-click="addAction();" ng-show="isAdd">保存</button>
+                <button class="btn btn-info" ng-click="updateAction();" ng-show="!isAdd">更新</button>
+                <button class="btn btn-info" ng-click="hideAddActionView();">取消</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,31 @@
+{
+    "code": 200,
+    "message": "Request has been processed successfully",
+    "data": [
+        {
+            "id": "follow_device_001",
+            "title": "follows device 1",
+            "badge": 9
+        }, {
+            "id": "follow_device_002",
+            "title": "follows device 2",
+            "badge": 3
+        }, {
+            "id": "follow_device_003",
+            "title": "follows device 3",
+            "badge": 0
+        }, {
+            "id": "follow_device_004",
+            "title": "follows device 4",
+            "badge": 0
+        }, {
+            "id": "follow_device_005",
+            "title": "follows device 5",
+            "badge": 20
+        }, {
+            "id": "follow_device_006",
+            "title": "follows device 6",
+            "badge": 0
+        }
+    ]
+}

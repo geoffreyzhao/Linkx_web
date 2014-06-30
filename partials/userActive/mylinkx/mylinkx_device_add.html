@@ -1,0 +1,88 @@
+<div class="right-content-container operator-device-container" ng-if="!!showAddDevice || !!showEditDevice">
+    <div class="mydevice-info-block">
+        <h2 class="margin-bottom-20">设备信息</h2>
+        <div class="device-detail-info-table">
+            <div class="device-detail-info-block">
+                <div class="device-detail-title-block">
+                    <input type="text" class="mylinkx-form-control operator-device-title device-title" id="device-title" placeholder="请输入设备名" ng-model="device.title" name="title" ng-blur="verifyTitle()">
+                    <textarea id="device-desc" class="mylinkx-form-control operator-device-desc device-desc" placeholder="请输入设备描述" ng-model="device.description"></textarea>
+                </div>
+                <div class="device-detail-info">
+                    <div class="device-detail-info-icon device-tags-icon" title="标签"></div>
+                    <div class="device-tags-dire" mylinkxtags value="tags"></div>
+                </div>
+                <div class="device-detail-info">
+                    <div class="device-detail-info-icon device-position-icon" title="位置"></div>
+                    <input type="text" class="mylinkx-form-control device-oper-info-input device-position" id="device-position" title="双击地图可快速定位"
+                        placeholder="请输入设备具体位置" ng-model="device.position" ng-blur="searchPointByAddress();">
+                    <div class="device-detail-info-icon device-placetype-icon" title="设备性质"></div>
+                    <select class="mylinkx-form-control device-oper-info-input-right"
+                         ng-model="device.placeType" ng-options="m.value as m.name for m in placeTypes"></select>
+                </div>
+                <div class="device-detail-last-info">
+                    <div class="device-detail-info-icon device-type-icon" title="设备类型"></div>
+                    <select class="mylinkx-form-control device-oper-info-input"
+                        ng-model="device.type" ng-options="p.value as p.name for p in types"></select>
+                    <div class="device-detail-info-icon device-exposed-icon" title="设备公开"></div>
+                    <select class="mylinkx-form-control device-oper-info-input-right"
+                         ng-model="device.isExposed" ng-options="p.value as p.name for p in isExposeds"></select>
+                </div>
+            </div>
+            <div class="device-detail-image mydevice-image">
+                <div style="width:300px;height:200px;position:absolute;top:0;left:0;line-height:200px;text-align:center;cursor:pointer;" ng-click="deviceImageManagement();">
+                  <img ng-class="{'device-detail-image-cover': (!!devicePaths.length)}" ng-src="{{imageBaseUrl | resetDeviceCover:devicePaths}}" alt=""/>
+                </div>
+                <div class="device-image-upload-container">
+                    <div class="upload-device-img-container cursor-pointer" ng-click="deviceImageManagement();">
+                        <span class="vertical-align-middle">照片管理</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mylinkx-map-title-block" style="position: relative;">
+        <h2 class="margin-bottom-20">地图</h2>
+        <div class="mylinkx-map-lat-lng">
+            <div class="map-icon"></div><span class="map-lat-text">{{device.longitude}}</span>
+            <div class="map-icon map-lat-icon"></div><span class="map-lng-text">{{device.latitude}}</span>
+        </div>
+    </div>
+    <div id="my_owen_linkx_device_add" class="mydevice-map-block ng-cloak"></div>
+    <div class="oper-device-toolbar">
+        <div class="oper-device oper-yes" ng-click="addDevice()" ng-show="showAddDevice"></div>
+        <div class="oper-device oper-yes" ng-click="editDevice()" ng-show="showEditDevice"></div>
+        <div class="oper-device oper-no" ng-click="cancel()"></div>
+        <button class="delete-device-btn" data-toggle="modal" data-target="#deviceDeviceModal" ng-show="showEditDevice">删除该设备</button>
+        <div id="deviceDeviceModal" class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header confirm-dialog-header">
+                        <a class="close confirm-dialog-close" data-dismiss="modal"></a>
+                        <label class="modal-title" id="myModalLabel">删除设备确认</label>
+                    </div>
+                    <div class="modal-body confirm-dialog-body">
+                        是否确定删除设备: {{device.title}}?
+                    </div>
+                    <div class="modal-footer confirm-dialog-footer">
+                        <div class="yes-no-icon yes-icon" data-dismiss="modal" ng-click="delDevice()"></div>
+                        <div class="yes-no-icon no-icon" data-dismiss="modal"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="deviceLightbox" class="modal fade bs-modal-sm light-box-container" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+            aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header confirm-dialog-header">
+                  <a class="close confirm-dialog-close" data-dismiss="modal" ng-click="closeSupersized();" aria-hidden="true"></a>
+                  <label class="modal-title" id="myModalLabel">照片管理</label>
+                </div>
+                <div class="modal-body">
+                    <div lightbox class="light-box" baseurl="imageBaseUrl"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

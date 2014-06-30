@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" ng-app="LinkX">
+    <head>
+        <!--<meta charset="utf-8">  -->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title ng-bind="siteTitle"></title>
+        <link rel="stylesheet" href="vendor/bootstrap-2.3.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="vendor/bootstrap-2.3.2/css/bootstrap-responsive.css" />
+        <link rel="stylesheet" href="vendor/bootstrap-2.3.2/css/bootstrap-datetimepicker.min.css" />
+        <link rel="stylesheet" href="css/normalize.css"/>
+        <link rel="stylesheet" href="css/LinkX.css"/>
+        <link rel="stylesheet" href="css/device.css"/>
+        <link rel="stylesheet" href="css/sensor.css"/>
+        <link rel="stylesheet" href="css/action.css"/>
+        <link rel="stylesheet" href="css/account.css"/>
+        <link rel="stylesheet" href="css/jpaginate.css"/>
+        <script src="http://ditu.google.cn/maps/api/js?sensor=false&key=AIzaSyAdjn9QQLGK9-gi6SYn4JFXFhZdL2waXUo"></script>
+        <script src="vendor/LAB.min.js"></script>
+    </head>
+    <body ng-controller="mainController">
+        <div class="navi-wrapper" ng-include src="'views/navigation.html'"></div>
+        <div class="main-wrapper">
+            <div ng-view class=""></div>
+        </div>
+        <div class="footer" ng-include src="'views/footer.html'"></div>
+        <div
+            class="alert fade bsAlert"
+            id="bsAlert"
+            bs-alert="bsAlert.data"
+            ng-show="bsAlert.show"
+            ng-class="{'alert-success': bsAlert.type, 'alert-error': !bsAlert.type}">
+        </div>
+    </body>
+    <script>
+        $LAB
+            .script([
+                'vendor/jquery-2.0.3.js',
+                'js/config.js',
+                'js/util.js'
+            ])
+            .script([
+                'vendor/bootstrap-2.3.2/js/bootstrap.js',
+                'vendor/bootstrap-2.3.2/js/bootstrap-datetimepicker.min.js',
+                'vendor/angular-1.0.7/angular.js',
+                //'vendor/angular-unstable.js',
+                'vendor/angular-1.0.7/angular-resource.js',
+                'vendor/angular-1.0.7/angular-cookies.js',
+                'vendor/angular-strap.js',
+                'vendor/ng-i18n-0.2.1.js',
+                'vendor/dp/amcharts.js',
+                'vendor/dp/timeline/jsapi.js',
+                'vendor/dp/timeline/saved_resource.js',
+                'vendor/dp/timeline/format.zh_CN.default.I.js',
+                'vendor/dp/timeline/timeline.js',
+                'vendor/underscore-min.js',
+                //'---------'
+                'js/controllers/controllers.js',
+                'js/services/services.js',
+                'js/directives/directives.js',
+                'js/filters/filters.js',
+                //'---------'
+                'js/controllers/miscCtrl.js',
+                'js/controllers/homepageCtrl.js',
+                'js/controllers/myDeviceCtrl.js',
+                'js/controllers/sensorCtrl.js',
+                'js/controllers/actionCtrl.js',
+                'js/controllers/triggerCtrl.js',
+                'js/controllers/accountCtrl.js',
+                //'---------'
+                'js/services/dataPool.js',
+                //'---------'
+                'js/app.js',
+                //'---------'
+                'js/modules/gis.js'
+            ])
+            .wait(function() {
+                angular.bootstrap(document, ['LinkX', 'LinkX.services']);
+                //console.log('config:', linkx.config);
+                window.location.port === '8020' ? linkx.config.setOfflineMode() : linkx.config.setOnlineMode();
+            });
+    </script>
+</html>

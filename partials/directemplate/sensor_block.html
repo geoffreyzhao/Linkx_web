@@ -1,0 +1,62 @@
+<div>
+    <div class="mydevice-sensor-block" ng-show="!showAddSensor">
+        <h1>传感器</h1>{{showAddSensor}}
+        
+        <div class="">
+            <span class="btn btn-primary btn-sm pull-right flat-radius" style="margin-left: 10px;" ng-click="goAddSensor()">
+                <span class="glyphicon glyphicon-plus"></span>
+            </span>
+        </div>
+        
+        <div class="sensor-tabs">
+            <ul class="sensor-tab-ul nav nav-tabs" id="">
+                <li class="sensor-tab-ul-li" ng-repeat="s in sensors">
+                    <a href="" data-toggle="tab">{{s.title}}</a>
+                    <div class="dropdown">
+                        <button class="sensor-tab-btn btn dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </button>
+                        <ul class="sensor-tab-ul-ul dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">编辑</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">删除</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <button class="mydevice-margin-left-300 btn btn-info" ng-click="oper.editSensor();" >修改</button>
+        
+        <div class="time-block">
+            <!-- sensor datapoint display
+            <span>查看时间段: 从</span>
+            <div id="numPicker{{sensor.id}}1" class="input-append date">
+                <input id="numStartDate{{sensor.id}}" data-format="yyyy-MM-dd hh:mm:ss" type="text"></input>
+                <span class="add-on" ng-click="showTime">
+                    <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                    </i>
+                </span>
+            </div>
+
+            <span>到</span>
+            <div id="numPicker{{sensor.id}}2" class="input-append date">
+                <input id="numEndDate{{sensor.id}}" data-format="yyyy-MM-dd hh:mm:ss" type="text"></input>
+                <span class="add-on" ng-click="showTime">
+                    <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                    </i>
+                </span>
+            </div>
+
+            <button class="btn btn-info" ng-click="oper.setNumTime(sensor.id);">确定</button>
+            <button ng-click="oper.setNumCurrentTime(sensor.id);" class="btn btn-info">当前时间</button>
+            -->
+        </div>
+
+        <div class="dp-block"></div>
+        <div class="mydevice-add-sensor-block" ng-show="showAddSensor" ng-include="partials.mylinkx_sensor_add"></div>
+    </div>
+</div>

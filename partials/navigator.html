@@ -1,0 +1,72 @@
+<div ng-controller="naviCtrl">
+
+    <nav class="navbar navbar-default navbar-default navbar-fixed-top" role="navigation" >
+
+        <a class="mylinkx-logo" ng-href="{{'#/user_mylinkx' | userLoginFilter}}">
+            <div class="logo-background"></div>
+            <div class="logo-container">
+                <img ng-src="images/mylinkx/logo.png"/>
+            </div>
+        </a>
+
+        <div class="mylinkx-nav collapse navbar-collapse">
+            <ul class="nav navbar-nav" navigator>
+                <li data-match-route="/user_dashboard" ng-show="!user.homepage && user.signin">
+                    <a href="#/user_dashboard" ng-click="clearMessage();"><span class="header-icon user-dashboard-icon"></span>{{i18n('navi.dashboard')}}</a>
+                    <div class="mylinkx-nav-bottom"></div>
+                </li>
+                <li data-match-route="/user_mylinkx" ng-click="clearMessage();" ng-show="!user.homepage && user.signin">
+                    <a href="#/user_mylinkx"><span class="header-icon user-list-page-icon"></span>{{i18n('navi.mylinkx')}}</a>
+                    <div class="mylinkx-nav-bottom"></div>
+                </li>
+                <li data-match-route="/user_discovery" ng-click="clearMessage();" ng-show="!user.homepage &&  user.signin">
+                    <a href="#/user_discovery"><span class="header-icon user-discovery-icon"></span>{{i18n('navi.discoveryX')}}</a>
+                    <div class="mylinkx-nav-bottom"></div>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav pull-right" navigator>
+                <li class="dropdown" ng-show="user.signin">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="username-info">{{user.userName}}</span>
+                        <img class="user-avatar"
+                            ng-src="{{user.icon | userAvatar:imageBaseUrl}}"/>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right" style="width: 100%;" role="menu">
+                         <li>
+                             <a href="" style="text-align: center;" data-toggle="modal" data-target="#logoutModal">{{i18n('navi.logout')}}</a>
+                         </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="pull-right user-unsign-ul" navigator>
+                <li data-match-route="/" ng-show="!user.signin">
+                    <a href="#/user_login">{{i18n('navi.login')}}</a>
+                </li>
+                <li data-match-route="/user_register" ng-show="!user.signin">
+                    <a href="#/user_register">{{i18n('navi.register')}}</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="logoutModal" class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header confirm-dialog-header">
+                    <a class="close confirm-dialog-close" data-dismiss="modal"></a>
+                    <label class="modal-title" id="myModalLabel">注销确认</label>
+                </div>
+                <div class="modal-body confirm-dialog-body">
+                    是否确定退出LinkX, {{user.userName}}?
+                </div>
+                <div class="modal-footer confirm-dialog-footer">
+                    <div class="yes-no-icon yes-icon" data-dismiss="modal" ng-click="logout()"></div>
+                    <div class="yes-no-icon no-icon" data-dismiss="modal"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

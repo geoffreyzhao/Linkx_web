@@ -1,0 +1,43 @@
+{
+    "code": 200,
+    "message": "Get devices success",
+    "data": [
+        {
+            "id": "1",
+            "title": "颗粒探测器",
+            "status": "SHUTDOWN",
+            "type": "LINKX_DEVICE",
+            "location": "OUTSIDE",
+            "tags": "temp, yoose, haaw",
+            "isExposed": 0,
+            "position": "Shanghai",
+            "description": "Owxxiwe salwss xiLisw aqIaw aaaw.sdf Owxxiwe salwss xiLisw aqIaw aaaw.sdf Owxxiwe salwss xiLisw aqIaw aaaw.sdf Owxxiwe salwss xiLisw aqIaw aaaw.sdf Owxxiwe salwss xiLisw aqIaw aaaw.sdf",
+            "imgPath":["upload\\30072_big_14.jpg","upload\\Blue hills.jpg"],
+            "imgId": ["1", "2", "3"]
+        }, {
+            "id": "2",
+            "title": "紫外线探测器",
+            "status": "SHUTDOWN",
+            "type": "LINKX_DEVICE",
+            "location": "OUTSIDE",
+            "tags": "temp, yoose, haaw",
+            "isExposed": 0,
+            "position": "Shanghai",
+            "description": "Owxxiwe salwss xiLisw aqIaw aaaw.sdf Owxxiwe salwss xiLisw aqIaw aaaw.sdf Owxxiwe salwss xiLisw aqIaw aaaw.sdf Owxxiwe salwss xiLisw aqIaw aaaw.sdf Owxxiwe salwss xiLisw aqIaw aaaw.sdf",
+            "imgPath":["upload\\Blue hills.jpg"],
+            "imgId": ["1", "2", "3"]
+        }, {
+            "id": "3",
+            "title": "光照探测器",
+            "status": "SHUTDOWN",
+            "type": "LINKX_DEVICE",
+            "location": "OUTSIDE",
+            "tags": "temp, yoose, haaw",
+            "isExposed": 0,
+            "position": "Shanghai",
+            "description": "Owxxiwe salwss xiLisw aqIaw aaaw.sdf Owxxiwe salwss xiLisw aqIaw aaaw.sdf Owxxiwe salwss xiLisw aqIaw aaaw.sdf Owxxiwe salwss xiLisw aqIaw aaaw.sdf Owxxiwe salwss xiLisw aqIaw aaaw.sdf",
+            "imgPath":["upload\\Sunset.jpg","upload\\30072_big_14.jpg","upload\\Blue hills.jpg"],
+            "imgId": ["1", "2", "3"]
+        }
+    ]
+}

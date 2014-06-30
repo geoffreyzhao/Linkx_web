@@ -1,0 +1,12 @@
+{
+    "code": 200,
+    "message": "Request has been processed successfully",
+    "url": null,
+    "data": {
+        "id": 6,
+        "apiKey": "45c3b337667d46fa9ddd83b89ebe9ead",
+        "email": "kky@qq.com",
+        "userName": "kky",
+        "nickName": "kky"
+    }
+}

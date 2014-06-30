@@ -1,0 +1,102 @@
+{
+    "code": 200,
+    "message": null,
+    "url": null,
+    "data": [
+        {
+            "id": 7,
+            "title": "fffdsf",
+            "description": "fd",
+            "tags": "PM2.5",
+            "type": "NUMBER",
+            "properties": {
+                "unitName": "摄氏度",
+                "symbol": "°"
+            }
+        },
+        {
+            "id": 6,
+            "title": "gen",
+            "description": "gen",
+            "tags": "PM2.5",
+            "type": "GPS",
+            "properties": {
+                "unitName": "摄氏度",
+                "symbol": "°"
+            }
+        },
+        {
+            "id": 4,
+            "title": "image",
+            "description": "image",
+            "tags": "PM10",
+            "type": "GPS",
+            "properties": {
+                "unitName": "摄氏度",
+                "symbol": "°"
+            }
+        },
+        {
+            "id": 1,
+            "title": "sensor1",
+            "description": "this is a sensor for sensor1.",
+            "tags": "NO2",
+            "type": "NUMBER",
+            "properties": {
+                "symbol": "C"
+            }
+        },
+        {
+            "id": 2,
+            "title": "sensor",
+            "description": "this is a sensor for sensor1.",
+            "tags": "NO2",
+            "type": "NUMBER",
+            "properties": {
+                "symbol": "C"
+            }
+        },
+        {
+            "id": 3,
+            "title": "sensor3",
+            "description": "this is a sensor for sensor1.",
+            "tags": "NO2",
+            "type": "NUMBER",
+            "properties": {
+                "symbol": "C"
+            }
+        },
+        {
+            "id": 11,
+            "title": "sensor11",
+            "description": "this is a sensor for sensor1.",
+            "tags": "NO2",
+            "type": "NUMBER",
+            "properties": {
+                "symbol": "C"
+            }
+        }
+        ,
+        {
+            "id": 12,
+            "title": "sensor12",
+            "description": "this is a sensor for sensor1.",
+            "tags": "NO2",
+            "type": "NUMBER",
+            "properties": {
+                "symbol": "C"
+            }
+        }
+        ,
+        {
+            "id": 13,
+            "title": "sensor13",
+            "description": "this is a sensor for sensor1.",
+            "tags": "NO2",
+            "type": "NUMBER",
+            "properties": {
+                "symbol": "C"
+            }
+        }
+    ]
+}

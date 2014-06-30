@@ -1,0 +1,170 @@
+<div class="register-wrapper">
+    <span class="register-title" ng-bind="_rb.userregister"></span>
+    <hr>
+    <div class="form-wrapper">
+        <div class="left-wrapper">
+            <form class="form-horizontal" name="registerForm"  ng-submit="register()">
+                <fieldset>
+                    <div class="control-group">
+                        <label class="control-label" for="email">
+                            {{_rb.email}}
+                            <span class="input-required-feild"></span>
+                        </label>
+                        <div class="controls">
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="{{_rb.regph}}"
+                                ng-model="form.email.data" required>
+                            <span
+                                class="input-unconfirmed"
+                                ng-bind="_rb.emailerror"
+                                ng-show="registerForm.email.$dirty && registerForm.email.$invalid">
+                            </span>
+                            <span
+                                class="input-confirmed"
+                                ng-show="registerForm.email.$dirty && registerForm.email.$valid">
+                            </span>
+                        </div>
+                        <div class="comments">{{_rb.emailcomments}}</div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="password">
+                            {{_rb.pwd}}<span class="input-required-feild"></span>
+                        </label>
+                        <div class="controls">
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="{{_rb.pwdph}}"
+                                ng-model="form.password.data"
+                                ng-minlength="6"
+                                ng-maxlength="20"
+                                ng-change="form.password.passwordChanged()" required>
+                            <span
+                                class="input-unconfirmed"
+                                ng-bind="_rb.pwderror"
+                                ng-show="registerForm.password.$dirty && registerForm.password.$invalid">
+                            </span>
+                            <span
+                                class="input-confirmed"
+                                ng-show="registerForm.password.$dirty && registerForm.password.$valid">
+                            </span>
+                        </div>
+                        <div class="comments">{{_rb.pwdcomments}}</div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="repassword">
+                            {{_rb.repwd}}<span class="input-required-feild"></span>
+                        </label>
+                        <div class="controls">
+                            <input
+                                type="password"
+                                id="repassword"
+                                name="repassword"
+                                placeholder="{{_rb.repwdph}}"
+                                ng-model="form.repassword.data"
+                                ng-minlength="6"
+                                ng-change="form.password.passwordChanged()" required>
+                            <span
+                                class="input-unconfirmed"
+                                ng-bind="_rb.pwdnotmatch"
+                                ng-show="registerForm.repassword.$dirty && !form.password.passwordMatched">
+                            </span>
+                            <span
+                                class="input-confirmed"
+                                ng-show="registerForm.repassword.$dirty && registerForm.repassword.$valid && form.password.passwordMatched">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="nickname">
+                            {{_rb.nickname}}<span class="input-required-feild"></span>
+                        </label>
+                        <div class="controls">
+                            <input
+                                type="text"
+                                id="nickname"
+                                name="nickname"
+                                placeholder="{{_rb.nicknameph}}"
+                                ng-model="form.nickname.data" required>
+                        </div>
+                        <div class="comments">{{_rb.nicknamecomments}}</div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="verification">
+                            {{_rb.verification}}<span class="input-required-feild"></span>
+                        </label>
+                        <div class="controls">
+                            <input
+                                type="text"
+                                id="verification"
+                                name="verification"
+                                placeholder="{{_rb.verifyph}}"
+                                ng-model="form.verification.data"
+                                ng-change="form.verification.verify()" required>
+                            <span
+                                class="input-unconfirmed"
+                                ng-bind="_rb.verifyerror"
+                                ng-show="registerForm.verification.$dirty && !form.verification.verified">
+                            </span>
+                            <span
+                                class="input-confirmed"
+                                ng-show="registerForm.verification.$dirty && form.verification.verified">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <label
+                                class="btn btn-medium disabled verification"
+                                ng-bind="form.verification.code">
+                            </label>
+                            <span ng-click="form.verification.generateCode()"><a href="" style="margin-left: 10px;">{{_rb.otherverify}}</a></span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"></label>
+                        <div class="controls">
+                            <label class="checkbox">
+                                <input
+                                    type="checkbox"
+                                    checked="checked"
+                                    name="signUpCheck"
+                                    ng-model="form.rules.data">{{_rb.linkxrulestip}}<a href=""> {{_rb.linkxrules}}</a>
+                                <span
+                                    class="input-confirmed"
+                                    ng-show="form.rules.data">
+                                </span>
+                            </label>
+                        </div>
+                        <span
+                            class="input-unconfirmed comments"
+                            ng-show="!form.rules.data"
+                            ng-bind="_rb.ruleserror">
+                        </span>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                ng-bind="_rb.register"
+                                ng-disabled="registerForm.$invalid || !form.password.passwordMatched || !form.verification.verified || !form.rules.data">
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="right-wrapper">
+            <div>{{_rb.prehaveaccount}} <a href="#/login">{{_rb.loginnow}}</a></div>
+            <div class="third-part">
+                /*third part login access*/
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

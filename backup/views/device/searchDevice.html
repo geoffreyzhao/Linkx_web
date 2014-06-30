@@ -1,0 +1,69 @@
+<div ng-controller="searchDeviceController" class ="">
+    <form class="form-horizontal">
+    <div class="search-device">
+        <div class="control-group">
+            <label class="control-label">设备类型</label>
+            <div class="controls">
+                <div id="allType" class="search-all" ng-class="{'search-all-selected': selectAllType}" ng-click="oper.selectAll('type','allType')">不限</div> 
+                <label class="type search-checkbox checkbox inline" ng-repeat="type in types" value="{{type.type}}">
+                    <input type="checkbox" name="type" ng-click="toggleType()" value="{{type.type}}"> {{type.value}}
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">热门标签</label>
+            <div class="controls">
+                <div id="allTags" class="search-all search-all-selected" ng-class="{'search-all-selected': selectAllTags}" ng-click="oper.selectAll('tags','allTags')">不限</div> 
+                <label class="tags search-checkbox checkbox inline" ng-repeat="t in tags">
+                    <input type="checkbox" name="tags" ng-click="toggleTags()" value="{{t}}">{{t}}
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">地域筛选</label>
+            <div class="controls">
+                <input type="text" id="inputPosition" placeholder="选择城市" ng-model="position">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputTitle">关键字</label>
+            <div class="controls">
+                <input type="text" id="inputTitle" placeholder="可以添加附加关键字" ng-model="title">
+                <button ng-click="oper.search(1);" class="btn btn-info">确定</button>
+            </div>
+        </div>
+    </div>
+    </form>
+    <div>
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>标签</th>
+                    <th>位置</th>
+                    <th>描述</th>
+                    <th>创建用户</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="device in deviceList">
+                    <td ng-bind="device.title"></td>
+                    <td ng-bind="device.tags"></td>
+                    <td ng-bind="device.position"></td>
+                    <td ng-bind="device.description"></td>
+                    <td ng-bind="device.user.userName"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class = "page">
+            <button ng-click="oper.search(1);" class="btn btn-info">首页</button>
+            <button ng-click="oper.search(page.page - 1);" class="btn btn-info" ng-disabled="page.page == 1">上一页</button>
+            <button ng-click="oper.search(page.page + 1);" class="btn btn-info" ng-disabled="page.page == page.pageTotal">下一页</button>
+            <button ng-click="oper.search(page.pageTotal);" class="btn btn-info">尾页</button>
+            <div class="page-select">跳转到第 <input type="text" id="inputPage" class ="page-input" ng-model="pageSelected">页
+            <button ng-click="oper.search(pageSelected)" class="btn btn-info">确定</button>
+            </div>
+            <div class="page-info">Page {{page.page}} of {{page.pageTotal}}</div>
+        </div>
+    </div>
+</div>

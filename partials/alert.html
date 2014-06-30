@@ -1,0 +1,7 @@
+<div ng-controller="alertCtrl" class="message_queue">
+	<div ng-repeat="messageObj in messageQueue" class="alert {{messageObj.clazz}} alert-dismissable navbar-fixed-bottom">
+    	<div class="message_icon {{messageObj.messageIcon}}"></div>
+    	<div class="message_content" title="{{messageObj.message}}">{{messageObj.message}}</div>
+    	<button type="button" ng-show="messageObj.showCloseIcon" class="message_icon alert_close" ng-click="stopTimeout($index)"></button>
+	</div>
+</div>

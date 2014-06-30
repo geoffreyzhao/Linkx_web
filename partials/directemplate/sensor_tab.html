@@ -1,0 +1,50 @@
+<div>
+
+    <ul class="sensor-tab-ul nav nav-tabs" id="">
+        <li class="sensor-tab-page-btn"  >
+            <button type="button" class="btn btn-primary btn-xs" ng-class="{'disabled': page == 1 || page == undefined}" ng-click="changeSensorsForPage(page - 1)">
+                <span class="glyphicon glyphicon-arrow-left"></span>
+            </button>
+        </li>
+        <li class="sensor-tab-ul-li " ng-repeat="sen in sensorsForPage" ng-class="{'active': sen.title === tab_detail.title }" >
+            <a href="#home" data-toggle="tab" ng-click="selectSensor(sen, $event)" title="{{sen.title}}">{{sen.title}}</a>
+            
+            <div class="dropdown" ng-show="sen.id != undefined && tab_category == 'mydevice' && sen.title === tab_detail.title">
+                <button class="sensor-tab-btn btn dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" >
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+                <ul class="sensor-tab-ul-ul dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" ng-click="tab_goEditSensor()">编辑</a>
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#deleteSensorModal">删除</a>
+                    </li>
+                </ul>
+            </div>
+
+        </li>
+        <li class="sensor-tab-page-btn" >
+            <button type="button" class="btn btn-primary btn-xs" ng-class="{'disabled': page == pageTotal}" ng-click="changeSensorsForPage(page + 1)">
+                <span class="glyphicon glyphicon-arrow-right"></span>
+            </button>
+        </li>
+    </ul>
+            <div id="deleteSensorModal" class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Delete Confirm</h4>
+                        </div>
+                        <div class="modal-body">
+                            Are your sure to delete : " {{tab_detail.title}} "?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="tab_goDelSensor()">Yes</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>

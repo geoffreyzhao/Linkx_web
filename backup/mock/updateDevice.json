@@ -1,0 +1,16 @@
+{
+    "code": 200,
+    "message": "Update devices success",
+    "data": {
+            "id": "d0001",
+            "name": "颗粒探测器",
+            "status": "SHUTDOWN",
+            "type": "LINKX_DEVICE",
+            "location": "OUTSIDE",
+            "tags": ["temp", "yoose", "haaw"],
+            "isExposed": 0,
+            "position": "Shanghai",
+            "desc": "Owxxiwe salwss xiLisw aqIaw aaaw.",
+            "imgPath": "img/deviceIMG-1.jpg"
+        }
+}

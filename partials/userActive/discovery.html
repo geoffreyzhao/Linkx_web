@@ -1,0 +1,55 @@
+<div class="linkx_search_container">
+    <div class="linkx_search_left">
+        <div class="search-condition">
+            <div class="search-icon search-keyword-icon"></div>
+            <div class="search-condition-content">
+                <input type="text" class="search-input-content" id="keyword" placeholder="{{i18n('discovery_keyword')}}" ng-model="search.keywords">
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="search-condition">
+            <div class="search-icon search-position-icon"></div>
+            <div class="search-condition-content">
+                <input type="text" class="search-input-content"
+                    style="background-color:rgba(204,204,204,.2);outline:none;border:1px solid #aaa;"
+                    readonly id="position" ng-model="search.position"
+                    placeholder="{{i18n('discovery_position')}}"/>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="search-condition">
+            <div class="search-icon search-range-icon"></div>
+            <div class="search-range-content">
+                <div id="range" class="search-range-slider"></div>
+                <span ng-repeat="i in display_range_label" class="display-range-label search-range-{{$index}}">{{i}}</span>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div>
+            <div class="search-icon search-tags-icon"></div>
+            <div class="search-condition-content">
+                <table>
+                    <tr>
+                        <td class="sensor-tags-container cursor-pointer" ng-repeat="item in tags" ng-click="changeSearchTag($index, $event);">
+                            {{item}}
+                        </td>
+                        <td class="clearfix"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="linkx_search_right cursor-pointer" ng-click="searchAction();"></div>
+</div>
+<div id="linkx_search_map"></div>
+<div class="follow-device-tutorial" ng-show="showTutorial">
+    <div class="close_discover_toturial" ng-click="closeDiscoverToturial()"></div>
+</div>
+<div class="icon-comment">
+    <div class="map-discover-icon mine-icon"></div>
+    <span class="mine-icon-comment">我的设备</span>
+    <div class="map-discover-icon others-icon"></div>
+    <span class="others-icon-comment">其他设备</span>
+</div>
+<div class="footer-wrapper footer-discover" ng-include="partials.footer"></div>

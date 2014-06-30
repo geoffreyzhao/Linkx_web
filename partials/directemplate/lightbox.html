@@ -1,0 +1,71 @@
+<div class="light-box" ng-show="!showImageSelectArea">
+  <div id="carousel_light_box" class="carousel slide carousel-light-box" data-ride="carousel" ng-if="photos.original.length > 0">
+    <div class="carousel-inner">
+      <div class="item light-box-original" ng-repeat="uri in photos.original track by $index"
+            ng-class="{'active': ($index == 0), 'first': ($index == 0), 'last': (($index + 1) == photos.original.length)}">
+        <img redrawimg name="light-box-original" ng-src="{{uri}}"/>
+        <span style="display:none;">{{$index}}</span>
+        <div class="del-cover-icon-container" ng-if="!!flag">
+          <a class="oper-device-cover-icon del-device-cover-icon" ng-click="delCurrentCoverConfirm($index)"></a>
+        </div>
+      </div>
+    </div>
+    <a class="left carousel-control" data-target="#carousel_light_box" data-slide="prev">
+      <div class="oper-device-cover-icon left-glyphicon-icon"></div>
+    </a>
+    <a class="right carousel-control" data-target="#carousel_light_box" data-slide="next">
+      <div class="oper-device-cover-icon right-glyphicon-icon"></div>
+    </a>
+    <ol class="carousel-indicators">
+      <li data-target="#carousel_light_box" ng-repeat="uri in photos.thumb track by $index"
+          data-slide-to="{{$index}}" ng-class="{'active': ($index == 0)}" class="light-box-thumb">
+        <img style="width:100px;height:100px;" ng-src="{{uri}}"/>
+      </li>
+      <li class="light-box-thumb light-box-cover-add-li" ng-if="!!flag">
+        <form enctype="multipart/form-data" action="" class="upload-img-form">
+          <input uploadfile id="uploadDeviceImgInput" type="file" name="file" accept="image/gif, image/jpeg, image/png" class="btn">
+        </form>
+        <img style="position:absolute;top:20px;left:20px;" src="./images/mylinkx/icon_add.png"/>
+      </li>
+    </ol>
+    <div id="thumb-back"><div class="oper-device-cover-icon left-glyphicon-icon" ng-click="thumbBack()"></div></div>
+    <div id="thumb-forward"><div class="oper-device-cover-icon right-glyphicon-icon" ng-click="thumbForward()"></div></div>
+    <div class="delete-device-cover" ng-if="!!flag && !!delCoverFade">
+        <div class="modal-body" style="font-weight:bold;font-size:24px;text-align:center;margin:150px auto 50px;">
+            确定要删除此照片吗?
+        </div>
+        <div class="confirm-dialog-footer">
+          <div class="yes-no-icon yes-icon" ng-click="delCurrentCover()"></div>
+          <div class="yes-no-icon no-icon" ng-click="cancelDelCover();"></div>
+        </div>
+    </div>
+  </div>
+  <div class="device-add-cover-container" ng-if="!!flag && (photos.original.length == 0)">
+    <div class="light-box-original">
+      <img style="position:absolute;top:40%;left:45%;" src="./images/mylinkx/icon_add.png"/>
+      <form enctype="multipart/form-data" action=""
+           style="width:100%;height:100%;z-index:1;overflow:hidden;opacity:0;">
+        <input uploadfile id="uploadDeviceImgInput2" type="file" name="file"
+          style="height:100%;width:120%;font-size:0;position:relative;left:-10%;" 
+          accept="image/gif, image/jpeg, image/png" class="btn">
+      </form>
+    </div>
+    <ol class="carousel-indicators">
+      <li class="light-box-thumb light-box-cover-add-li" ng-if="!!flag">
+        <form enctype="multipart/form-data" action="" class="upload-img-form">
+          <input uploadfile id="uploadDeviceImgInput" type="file" name="file" accept="image/gif, image/jpeg, image/png" class="btn">
+        </form>
+        <img style="position:absolute;top:20px;left:20px;" src="./images/mylinkx/icon_add.png"/>
+      </li>
+    </ol>
+  </div>
+</div>
+<div class="original-photo-container" ng-if="!!showImageSelectArea">
+    <div class="light-box-original">
+      <img class="original-photo"/>
+    </div>
+    <div class="modal-footer confirm-dialog-footer">
+     <div class="yes-no-icon yes-icon" ng-click="cutImage()"></div>
+     <div class="yes-no-icon no-icon" ng-click="cancelCutImage()"></div>
+    </div>
+</div>

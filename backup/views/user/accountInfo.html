@@ -1,0 +1,46 @@
+﻿<div class="span8">
+    <div class="account-info-block" id="account-info-block">
+        <div class="control-group">
+            <span class="span2 control-label">用户名</span>
+            <div class="controls" ng-bind="currentUser.userName"></div>
+        </div>
+        <div class="control-group">
+            <span class="span2 control-label">apiKey</span>
+            <div class="controls" ng-bind="currentUser.apiKey"></div>
+        </div>
+        <div class="control-group">
+            <span class="span2 control-label">电子邮箱</span>
+            <div class="controls" ng-bind="currentUser.email"></div>
+        </div>
+        <div class="control-group">
+            <span class="span2 control-label">绑定帐号</span>
+            <div class="third-auth controls">
+                <div>
+                    <a target="_blank" href="{{socialURL}}/connect/weibo?apiKey={{currentUser.apiKey}}" >
+                        <img alt="新浪微博" src="{{snsImagePath}}/weibo.png" />
+                    </a>
+                </div>
+                <div>    
+                    <a target="_blank" href="{{socialURL}}/connect/tqq?apiKey={{currentUser.apiKey}}" >
+                        <img alt="腾讯微博" src="{{snsImagePath}}/tqq.png" />
+                    </a>
+                </div>
+                <div>
+                    <a target="_blank" href="{{socialURL}}/connect/renren?apiKey={{currentUser.apiKey}}" >
+                        <img alt="人人" src="{{snsImagePath}}/renren.png" />
+                    </a>
+                </div>
+                <div>
+                    <a target="_blank" href="{{socialURL}}/connect/douban?apiKey={{currentUser.apiKey}}" >
+                        <img alt="豆瓣" src="{{snsImagePath}}/douban.png" />
+                    </a>
+                </div>
+                <div>
+                    <a target="_blank" href="{{socialURL}}/connect/qzone?apiKey={{currentUser.apiKey}}" >
+                        <img alt="QQ" src="{{snsImagePath}}/qzone.png" />
+                    </a>
+                <div>
+            </div>
+        </div>
+    </div>
+</div>

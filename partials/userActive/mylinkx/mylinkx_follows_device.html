@@ -1,0 +1,51 @@
+<div ng-controller="followsDeviceCategoryCtrl">
+    <a class="title-list-container" href="#/user_mylinkx/followsdevice" ng-show="!searchTag">
+      <label class="cursor-pointer">{{i18n('menu.my_follow_device')}}</label>
+      <span class="my-follow-device-count cursor-pointer" title="我关注的设备数量">{{myFollowedDeviceList.length}}</span>
+    </a>
+    <a class="title-list-container" ng-show="searchTag">
+      <label >{{i18n('menu.my_follow_device')}}</label>
+      <span class="my-follow-device-count" title="我关注的设备数量">{{myFollowedDeviceList.length}}</span>
+    </a>
+    <a href="#/user_discovery" class="follow-more-device">关注更多设备</a>
+    <a class="more" ng-show="!searchTag && (myFollowedDeviceList.length > 3) && !currentCategory"
+        style="display:block;" href="#/user_mylinkx/followsdevice">
+        <div class="cursor-pointer more-icon" ></div>
+    </a>
+    <div>
+        <div class="list-item-block cursor-pointer col-md-4" ng-repeat="item in myShowFollowedDeviceList" ng-click="getFollowedDeviceDetail(item, $index)">
+            <div class="device-img">
+                <img class="device-detail-image-cover" ng-src="{{imageBaseUrl | resetDeviceCover:item.imgPath}}"/>
+            </div>
+            <div class="title-block" ng-if="!searchTag">
+                <span class="item-title followed-item-title" title="{{item.title}}">{{item.title}}</span>
+            </div>
+            <div class="item-desc" title="{{item.description}}" ng-if="!searchTag">{{item.description}}</div>
+             <div class="searchShowItem" ng-if="!!searchTag">
+              <div class="title-block">
+                  <div class="item-title my-device-title" title="{{item.title}}">
+                    <div ng-bind-html="item.searchTitle | to_trusted"></div>
+                  </div>
+              </div>
+              <div class="item-desc" title="{{item.description}}">
+                  <div ng-bind-html="item.searchDesc | to_trusted"></div>
+              </div>
+            </div>
+            <div class="list-item-bottom-block">
+                <div class="status-icon online-offline-icon" title="{{i18n(item.status)}}" ng-class="{'online-icon': (item.status == 'ONLINE'), 'offline-icon' : (item.status == 'OFFLINE')}"></div>
+                <div class="list-item-sub-block">
+                    <div class="list-item-bottom-icon item-sensor-num" title="{{i18n('sensor_num')}}"></div>
+                    <span>{{item.sensorNum | sensorNumFilter:item.type}}</span>
+                    <div class="list-item-bottom-icon item-trigger-num" title="{{i18n('trigger_num')}}"></div>
+                    <span>{{item.triggerNum}}</span>
+                    <div class="list-item-bottom-icon item-followed-num" title="{{i18n('followed_num')}}"></div>
+                    <span class="attention-num">{{item.followNum}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="loading-img-block display-none">
+            <img class="datapoint-loading-img" ng-show="!data.value" ng-src="{{consts.loadingImage}}">
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

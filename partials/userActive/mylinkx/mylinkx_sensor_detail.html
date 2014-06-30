@@ -1,0 +1,190 @@
+<div >
+
+    <div class="sensor-latestdata-block"  >
+        <h2 class="margin-bottom-20">实时数据</h2>
+
+        <div class="latest-data-container">
+            <img class="datapoint-loading-img" style="margin-left: 50%;" ng-if="loading.sensors" ng-src="{{consts.loadingImage}}">
+            <div class="no-data" style="text-align: center;" ng-if="!loading.sensors" ng-show="!latestdata_lists || latestdata_lists.length <= 0">{{i18n('common.no_data')}}</div>
+            <div class="latest-data-item latestdata-block" ng-repeat="data in latestdata_lists">
+                <div class="text-overflow-block curr-data-title" title="{{data.title}}" >{{data.title}}</div>
+                <div>
+                    <span class="curr-data-val" ng-show="data.value">{{data.value || i18n('common.no_data')}}</span>
+                    <img class="datapoint-loading-img" ng-show = "!data.value" ng-src="{{consts.loadingImage}}">
+                </div>
+            </div>
+            <div class="hide-bottom-border"></div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="mydevice-sensor-block">
+
+        <h2 class="margin-bottom-20">历史数据</h2>
+        <div class="sensor-detail">
+            <div class="sensor-info" >
+                <div class="border-radius-lt" ng-class="{'sensor-status-del': sensorStatus=='del'}">
+                    <div class="border-radius-lt" ng-class="{'sensor-status-edit': sensorStatus=='edit' ||sensorStatus == 'list'}">
+                        <div class="border-radius-lt" ng-class="{'sensor-status-add': sensorStatus=='add'}">
+                            <div class="sensor-title-block" ng-class="{'sensor-title-active':sensorStatus=='list' ? true: sensorTitleStatus=='active'}" >
+                                <ul class="sensor-title-ul" >
+
+                                    <li class="sensor-detail-window-block text-overflow margin-right-10" ng-class="{'display-none':sensorStatus!='default'&&sensorStatus!='list'}"  >
+
+                                        <div class="sensor-title text-overflow" ng-bind="sensor.title" id="sensorTitle"></div>
+                                        <div class="triangle-up display-none"></div>
+                                        <div class="triangle-up-block"></div>
+                                        <div class="sensor-detail-window display-none">
+
+                                            <table class='sensor-info-window'>
+                                            <tr>
+                                                <td class="sensor-msg-title">传感器名称</td>
+                                                <td class='sensor-msg-value' title="{{sensor.title}}">{{sensor.title}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="sensor-msg-title">类型</td>
+                                                <td class='sensor-msg-value' >{{sensor.type}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="sensor-msg-title">单位/符号</td>
+                                                <td class='sensor-msg-value'>{{sensor.properties.unit}}/{{sensor.properties.symbol}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="sensor-msg-title">标签</td>
+                                                <td class='sensor-msg-value' >{{sensor.tags}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class='sensor-desc-label '>描述</td>
+                                              
+                                            </tr>
+                                            <tr>
+                                                 <td colspan="2" class='sensor-msg-value sensor-desc-value '>{{sensor.description}}</td>
+                                            </tr>
+
+                                        </table>
+
+                                        </div>
+                                    </li>
+                                    <li class="bg-color-blue border-radius-sensor-img edit-sensor-img margin-right-10 cursor-pointer" ng-show="sensorStatus!='default' ? false: sensorTitleStatus=='default' && myDeviceTag && sensors.length > 0 &&deviceForSensor.statusTag=='OWN'" ng-click="goEditSensor(sensor)" title="修改传感器"></li>
+                                    <li class="bg-color-green border-radius-sensor-img add-sensor-img margin-right-10 cursor-pointer" ng-show="sensorStatus!='default'? false: sensorTitleStatus=='default' && myDeviceTag &&deviceForSensor.statusTag=='OWN'" ng-click="goAddSensor();" title="添加传感器"></li>
+                                    <li class="bg-color-red border-radius-sensor-img del-sensor-img cursor-pointer" ng-show="sensorStatus!='default'? false: sensorTitleStatus=='default' && myDeviceTag && sensors.length > 0 &&deviceForSensor.statusTag=='OWN'" ng-click="readyDelSensor(sensor)" title="删除传感器"></li>
+                                    <li class="list-sensors-block" ng-class="{'display-none':sensorStatus!= 'default'&&sensorStatus!='active'&&sensorStatus!='list'}">
+                                       <div class="border-radius-sensor-img cursor-pointer"
+                                            ng-class="{'list-sensors-img-active': (sensorTitleStatus == 'active'), 'list-sensors-img':(sensorTitleStatus == 'default')}"
+                                            ng-show="sensorStatus!='list'"
+                                            ng-click="listSensors();">
+                                        </div>
+                                        <div ng-show="sensorStatus=='list'" class="border-radius-sensor-img list-sensors-img-list cursor-pointer" ng-click="hideSensors();" ></div>
+                                    </li>
+                                    
+                                    <!-- add sensor -->
+                                    <li ng-show="sensorStatus=='add'" class="sensor-title-add">添加传感器</li>
+                                    <li class="border-radius-sensor-img add-sensor-img-active margin-left-10 cursor-pointer" ng-show="sensorStatus=='add'" ></li>
+
+                                    <!-- edit sensor -->
+                                    <li ng-show="sensorStatus=='edit'" class="sensor-title-edit">修改传感器</li>
+                                    <li class="border-radius-sensor-img edit-sensor-img-active margin-left-10 cursor-pointer" ng-show="sensorStatus=='edit'" ></li>
+
+                                    <!-- del sensor -->
+                                    <li ng-show="sensorStatus=='del'" class="sensor-title-del">删除传感器</li>
+                                    <li class="border-radius-sensor-img del-sensor-img-active margin-left-10 cursor-pointer" ng-show="sensorStatus=='del'" ></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                        
+                <div class="sensor-detail-block">
+
+                    <div class="border-radius-lb" ng-class="{'sensor-status-del': sensorStatus=='del'}">
+                        <div class="border-radius-lb" ng-class="{'sensor-status-edit': sensorStatus=='edit' ||sensorStatus == 'list'}">
+                            <div class="border-radius-lb" ng-class="{'sensor-status-add': sensorStatus=='add'}">
+                                <div class="sensor-list-detail-block" ng-show="showSensorList">
+                                    <hr class="sensor-hr" ng-show="sensorStatus!='default'">
+                                    <ul class="sensor-list">
+                                        <li ng-repeat="data in sensors" ng-bind="data.title" class="max-width-sensor-item text-overflow cursor-pointer" ng-click="resetSensor(data);" ng-class="{'sensor-item-detail':sensorStatus=='list' && sensor.title == data.title}" ng-show="sensorStatus=='list'"></li>
+                                        <li ng-repeat="data in sensors" ng-bind="data.title" class="max-width-sensor-item text-overflow cursor-pointer" ng-class="{'sensor-item-add':sensorStatus=='add'&& sensor.title == data.title}" ng-show="sensorStatus=='add'"></li>
+                                        <li ng-repeat="data in sensors" ng-bind="data.title" class="max-width-sensor-item text-overflow cursor-pointer" ng-class="{'sensor-item-edit':sensorStatus=='edit'&& sensor.title == data.title}" ng-show="sensorStatus=='edit'" ng-click="goEditSensor(data)"></li>
+                                        <li ng-repeat="data in sensors" ng-bind="data.title" class="max-width-sensor-item text-overflow cursor-pointer" ng-class="{'sensor-item-del':sensorStatus=='del'&& sensor.title == data.title}" ng-show="sensorStatus=='del'" ng-click="readyDelSensor(data)"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="sensorStatus=='default'" class="sensor-time-block">
+                        <table>
+                            <tr>
+                                <td colspan="3">查看时间段</td>
+                            </tr>
+                            <tr>
+                                <td >从</td>
+                                <td colspan="2">
+                                    <div class="input-group date form_datetime" data-date="" data-date-format="yyyy/mm/dd hh:ii:ss">
+                                        <input class="form-control" size="16" type="text" ng-model="timeRange.beginTime" readonly>
+                                    
+                                        <div class="bg-color-gray input-group-addon time-picker" title="选择起始时间" ng-click="selectTime();">
+                                            <div class="border-radius-sensor-img  date-picker-img glyphicon glyphicon-time"></div>
+                                        </div>
+                                        <div class="fix-datepicker"></div>
+                                    </div> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td >到</td>
+                                <td>
+                                    <div class="input-group date form_datetime" data-date="" data-date-format="yyyy/mm/dd hh:ii:ss">
+                                        <input class="form-control" size="16" type="text" ng-model="timeRange.endTime" readonly>
+                                    
+                                        <div class="bg-color-gray input-group-addon time-picker" title="选择结束时间">
+                                            <div class="border-radius-sensor-img  date-picker-img glyphicon glyphicon-time"></div>
+                                        </div>
+                                        <div class="fix-datepicker"></div>
+                                    </div> 
+                                </td>
+                                <td >
+                                    <div class="bg-color-green border-radius-sensor-img datapicker-confirm margin-left-10 cursor-pointer" ng-click="refreshChart();" title="查询">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    
+                        <div class="time-range-block">
+                            <table>
+                                <tr>
+                                    <td ng-click="selectTimeRange('1h')" ng-class="{'time-range-active':range == '1h'}">1小时</td>
+                                    <td ng-click="selectTimeRange('3h')" ng-class="{'time-range-active':range == '3h'}">3小时</td>
+                                    <td ng-click="selectTimeRange('1w')" ng-class="{'time-range-active':range == '1w'}">1周</td>
+                                </tr>
+                                <tr>
+                                    <td ng-click="selectTimeRange('1m')" ng-class="{'time-range-active':range == '1m'}">1个月</td>
+                                    <td ng-click="selectTimeRange('3m')" ng-class="{'time-range-active':range == '3m'}">3个月</td>
+                                    <td ng-click="selectTimeRange('6m')" ng-class="{'time-range-active':range == '6m'}">6个月</td>
+                                </tr>
+                                <tr>
+                                    <td ng-click="selectTimeRange('1y')" ng-class="{'time-range-active':range == '1y'}">1年</td>
+                                    <td ng-click="selectTimeRange('all')" ng-class="{'time-range-active':range == 'all'}">全部</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-include="partials.direc_dp_number" ng-show="sensorStatus=='default'||sensorStatus=='list'" ></div>
+            <div ng-include="partials.mylinkx_sensor_add" ng-show="sensorStatus=='add'||sensorStatus =='edit'||sensorStatus=='del'" ng-class="{'add-sensor-detail':sensorStatus == 'add'}"></div>
+            <div class="clearfix"></div>
+        </div>
+
+    </div>
+</div>
+
+<div class="mylinkx-map-title-block" style="position: relative;margin-top: 40px;">
+    <h2 class="margin-bottom-20">地图</h2>
+    <div class="mylinkx-map-lat-lng">
+        <div class="map-icon"></div><span class="map-lat-text">{{device.longitude | positionFilter}}</span>
+        <div class="map-icon map-lat-icon"></div><span class="map-lng-text">{{device.latitude | positionFilter}}</span>
+    </div>
+</div>
+<div id="my_owen_linkx_device" class="mydevice-map-block"></div>

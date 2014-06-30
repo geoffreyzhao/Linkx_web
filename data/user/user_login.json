@@ -1,0 +1,12 @@
+{
+    "code": 200,
+    "message": "Request has been processed successfully",
+    "url": null,
+    "data": {
+        "id": 5,
+        "apiKey": "85a3b337667d46fa9ddd83b89ebe9ead",
+        "email": "jokers@sina.com",
+        "userName": "jokers",
+        "nickName": "jokers"
+    }
+}

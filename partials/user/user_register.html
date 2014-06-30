@@ -1,0 +1,95 @@
+<div class="register-wrapper unsignin-wrapper">
+    <div class="mylinkx-title-container">
+        <div class="title-trapezoid"></div>
+        <div class="title-content">
+            <label>注册成为LinkX用户</label>
+            <div class="title-bottom"></div>
+        </div>
+    </div>
+    <form class="mylinkx-register-form" ng-submit="register()">
+        <span class="register-login">如果您已拥有LinkX账号,<a href="#/user_login">请点击这里登录</a></span>
+        <table class="register-table">
+            <tr class="register-row">
+                <td class="register-row-label">{{i18n('userregister.email')}}</td>
+                <td class="register-row-content">
+                    <input
+                        type="email" id="email" name="email" class="register-form-control"
+                        placeholder="{{i18n('userregister.email.placeholder')}}"
+                        ng-model="form.email"
+                        ng-change="getDefaultUserName()" ng-blur="verifyField($event)">
+                </td>
+                <td class="register-row-tips">
+                    {{i18n('userregister.email.tips')}}
+                </td>
+            </tr>
+            <tr class="register-row">
+                <td class="register-row-label">{{i18n('userregister.password')}}</td>
+                <td class="register-row-content">
+                    <input
+                        type="password" id="password" name="password" class="register-form-control"
+                        placeholder="{{i18n('userregister.password.placeholder')}}"
+                        ng-model="form.password"
+                        ng-minlength="6" ng-maxlength="20"
+                        ng-blur="verifyField($event)">
+                </td>
+                <td class="register-row-tips">
+                    {{i18n('userregister.password.tips')}}
+                </td>
+            </tr>
+            <tr class="register-row">
+                <td class="register-row-label">{{i18n('userregister.repwd')}}</td>
+                <td class="register-row-content">
+                    <input
+                        type="password" id="repassword" name="repassword"
+                        class="register-form-control"
+                        placeholder="{{i18n('userregister.repwd.placeholder')}}"
+                        ng-model="form.repassword"
+                        ng-minlength="6" ng-maxlength="20"
+                        ng-blur="verifyField($event)">
+                </td>
+                <td></td>
+            </tr>
+            <tr class="register-row">
+                <td class="register-row-label">{{i18n('userregister.username')}}</td>
+                <td class="register-row-content">
+                    <input
+                        type="text" id="username" name="username"
+                        class="register-form-control"
+                        placeholder="{{i18n('userregister.username.placeholder')}}"
+                        ng-model="form.username" ng-blur="verifyField($event)">
+                </td>
+                <td class="register-row-tips">
+                    {{i18n('userregister.username.tips')}}
+                </td>
+            </tr>
+            <tr class="register-row">
+                <td class="register-row-label">{{i18n('userregister.verifycode')}}</td>
+                <td class="register-row-content">
+                    <input
+                        type="text" id="verifycode" name="verifycode"
+                        placeholder="{{i18n('userregister.verifycode.placeholder')}}"
+                        class="verify-code-input"
+                        ng-model="form.verifycode"
+                        ng-blur="verifyField($event)">
+                    <label class="btn-medium disabled verifycode">{{form.code}}</label>
+                </td>
+                <td class="register-row-tips">
+                    <span ng-click="generateCode()">
+                        <a href="" class="register-row-tips text-underline">{{i18n('userregister.verifycode.newer')}}</a>
+                    </span>
+                </td>
+            </tr>
+            <tr class="register-row">
+                <td class="register-row-label"></td>
+                <td>
+                    <span ng-init="form.rules = false" ng-click="form.rules = !form.rules" ng-class="{active: !!form.rules}" class="login-remember cursor-pointer"
+                        ng-model="form.rules"></span>
+                    <a href="linkx-usage.html" style="vertical-align: middle;" target="_blank">{{i18n('userregister.usage')}}{{i18n('userregister.usage.link')}}</a>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+        <button type="submit" class="login-button">{{i18n('userregister.submit')}}</button>
+    </form>
+    <div class="footer-wrapper" ng-include="partials.footer"></div>
+</div>

@@ -1,0 +1,62 @@
+.actionView {
+    padding: 0;
+}
+
+.actioninfo-item {
+    /*color: rgb(0, 136, 204);*/
+    font-size: 14pt;
+    font-weight: normal !important;
+}
+
+.actionView form {
+    margin-left: 75px;
+}
+
+.actionView .span3 {
+    float: left;
+    width: 195px;
+}
+
+.actionView .span9 {
+    float: none;
+    margin-left: 210px;
+    border-left: 1px solid #e5e5e5;
+}
+.actionView .control-label {
+    width: 72px;
+}
+
+.actionView .control-group {
+    height: 25px;
+    margin-bottom: 10px;
+}
+
+.controls .control-label {
+    text-align: left;
+    margin-left: 16px;
+    width: auto;
+    cursor: text;
+}
+
+.action-oper {
+    margin-left: 16px;
+}
+
+.action-oper button {
+    height: 23px;
+    line-height: 17px;
+}
+
+.action-form .controls input {
+    width: 712px ;
+}
+
+.action-form .controls input[type='radio'] {
+    width: 20px;
+}
+.action-form .controls span {
+    height: 30px;
+}
+.action-form select {
+    width: 725px !important;
+}

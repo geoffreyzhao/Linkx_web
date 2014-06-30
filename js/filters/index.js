@@ -1,0 +1,4 @@
+define([
+    './percentage',
+    './imageUrlFilter'
+], function() {});

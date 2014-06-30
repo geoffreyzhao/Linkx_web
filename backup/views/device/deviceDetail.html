@@ -1,0 +1,84 @@
+<script type="text/javascript" src="js/modules/imageUpload.js"></script>
+<div ng-controller="deviceDetailController">
+    <div ng-show="!devices.oper.edit">
+        <div class="span9">
+            <form class="form-inline normailize-margin">
+                <div class="control-group deviceName">
+                    <h2 ng-bind="selectedDevice.title"></h2>
+                    <div class="device-oper pull-left">
+                        <button ng-click="oper.editDevice()" ng-disabled="!selectedDevice" class="btn btn-info">编辑</button>
+                        <button ng-click="oper.removeDevice()" ng-disabled="!selectedDevice" class="btn btn-info">移除</button>
+                    </div>
+                </div>
+                <div class="control-group detail-group">
+                    <div class="detail-item">
+                        <label class="">标签</label>
+                        <span type="text" ng-bind="selectedDevice.tags" class=""></span>
+                    </div>
+                </div>
+                <div class="control-group detail-group">
+                    <div class="detail-item">
+                        <label class="">状态</label>
+                        <span type="text" ng-bind="selectedDevice.statusStr" class=""></span>
+                    </div>
+                </div>
+                <div class="control-group detail-group">
+                    <div class="detail-item">
+                        <label class="">类型</label>
+                        <span type="text" ng-bind="selectedDevice.typeStr" class=""></span>
+                    </div>
+                </div>
+                <div class="control-group detail-group">
+                    <div class="detail-item">
+                        <label class="">位置</label>
+                        <span type="text" ng-bind="selectedDevice.position" class=""></span>
+                    </div>
+                </div>
+                <div class="control-group detail-group">
+                    <div class="detail-item">
+                        <!-- <div ng-bind="selectedDevice.description"></div> -->
+                        <label class="">描述</label>
+                        <p ng-bind="selectedDevice.description" class=""></p>
+                    </div>
+                </div>
+            </form>
+            <div class="device-oper" style="margin-left: 16px;">
+                <button ng-click="oper.addSensor()" ng-disabled="!selectedDevice" class="btn btn-info">添加传感器</button>
+            </div>
+        </div>
+        
+        <div class="span3 image-show">
+            <div>
+                <div style="font-size: 13px;font-weight: bold;">设备图片</div>
+
+                <div id="myCarousel" class="carousel slide" >
+                    <div class="carousel-inner">
+                        <div class="item {{imageActive[$index]}}" ng-repeat="path in selectedDevice.imgPath">
+                            <img alt="" src="{{path}}" style="width: 220px;height: 150px;" ng-mouseenter="oper.deviceImageHover();" ng-mouseleave="oper.deviceImageLeave();">
+                            <div class="image-oper">
+                                <a ng-click="oper.removeImage($index)">删除</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ol class="carousel-indicators">
+                      <!-- <li data-target="#myCarousel" data-slide-to="0" class="active"></li> -->
+                      <li data-target="#myCarousel" data-slide-to="{{$index}}" class="{{imageActive[$index]}}" ng-repeat="path in selectedDevice.imgPath"></li>
+                    </ol>
+                    <a  class="imagePre left carousel-control" href="#myCarousel" data-slide="prev" ng-mouseenter="oper.deviceImageHover();" ng-mouseleave="oper.deviceImageLeave();">‹</a>
+                    <a  class="imageNext right carousel-control" href="#myCarousel" data-slide="next" ng-mouseenter="oper.deviceImageHover();" ng-mouseleave="oper.deviceImageLeave();">›</a>
+                </div>
+            </div>
+
+            <div id="imageDiv">
+                <!-- imageUpload('imageUpload', 1, {{selectedDevice.id}}); -->
+                <input type="file" name="imageUpload" id="imageUpload" onchange="$('#uploadButton').get(0).click();">
+                <button id="uploadButton" ng-click="oper.uploadImage();">hidden</button>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="devices.oper.edit">
+        <!-- 显示device编辑视图 -->
+    </div>
+</div>

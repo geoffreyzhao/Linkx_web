@@ -1,0 +1,11 @@
+{
+  "code": 200,
+    "message": null,
+    "url": null,
+    "data": {
+        "timestamp": 12354554325,
+        "data":{
+        	"val":123
+        }
+    }
+  }

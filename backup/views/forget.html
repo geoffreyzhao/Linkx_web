@@ -1,0 +1,42 @@
+<div class="forget-wrapper">
+    <span class="forget-title" ng-bind="_rb.forgetpwd"></span>
+    <hr>
+    <div class="form-wrapper">
+        <div class="left-wrapper">
+            <form class="form-horizontal" ng-submit="getPassword()">
+                <fieldset>
+                    <div class="control-group">
+                        <label class="control-label" for="email">
+                            {{_rb.email}}
+                            <span class="input-required-feild"></span>
+                        </label>
+                        <div class="controls">
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="{{_rb.loginph}}"
+                                ng-model="email" required>
+                        </div>
+                        <div class="comments">{{_rb.forgetcomments}}</div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                ng-bind="_rb.getpwd"
+                                ng-disabled="false">
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="right-wrapper">
+            <div>{{_rb.prebackto}} <a href="#/login">{{_rb.login}}</a></div>
+            <div>{{_rb.prenotaccount}} <a href="#/register">{{_rb.registernow}}</a></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

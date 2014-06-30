@@ -1,0 +1,16 @@
+﻿<div class="find-device-title" ng-bind="device.title"></div>
+<div class="device-info-tag" ng-bind="device.tags"></div>
+<div>创建者：<a href="" ng-bind="device.user.userName"></a></div>
+<hr>
+<div class="find-device-wrapper">
+    <ul class="nav nav-tabs">
+        <li ng-class= "{'active': showSensors}" ng-click ="oper.changeTab(true)"><a href="">传感器数据</a></li>
+        <li ng-class= "{'active': !showSensors}" ng-click ="oper.changeTab(false)"><a href="">设备详情</a></li>
+    </ul>
+    <div ng-show="showSensors">
+        <div ng-include src="'views/deviceSearch/sensorInfo.html'" class="clearfix"></div>
+    </div>
+    <div ng-show="!showSensors">
+        <div ng-include src="'views/deviceSearch/deviceInfo.html'" class="clearfix"></div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    /*overflow: hidden;*/
+    font-family: 'FZShuTi','arial';
+    font-size: 14px;
+}

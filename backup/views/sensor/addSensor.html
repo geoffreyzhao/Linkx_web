@@ -1,0 +1,94 @@
+<!-- 替换掉整个右侧视图， 显示addSensor视图-->
+<div ng-controller="addSensorController">
+    <div class="sensor-info-brief span10">
+        <form class="form-horizontal" id="sensorForm" name="sensorForm">
+            <fieldset>
+                <div ng-show="Add" class="breadcrumb">添加传感器</div>
+                <div ng-show="!Add" class="breadcrumb">修改传感器</div>
+                <div class="control-group">
+                    <label class="control-label" for="name">传感器名称</label>
+                    <div class="controls">
+                        <input type="text" id="name" name="title"
+                            class="span3 ng-pristine ng-invalid ng-invalid-required ng-valid-minlength" placeholder="请输入传感器名"
+                            ng-model="form.title" 
+                            ng-maxlength="30" required> 
+                         <span ng-show="sensorForm.title.$dirty &&(sensorForm.title.$error.required||sensorForm.title.$error.maxlength)">传感器名称长度1-30</span> 
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="type">类型</label>
+                    <div class="controls">
+                        <select id="type" class="sensor-type span3"
+                            ng-model="form.type"
+                            ng-options="t.value as t.name for t in types"
+                            data-style="btn-primary" bs-select></select>
+                    </div>
+                </div>
+                <div class="control-group" ng-show="showUnitDiv">
+                    <label class="control-label">单位/符号</label>
+                    <div class="controls">
+                        <input type="text" id="unitName" name="unitName"
+                            class="span2" placeholder="例如：摄氏度"
+                            ng-model="form.properties.unitName" ng-maxlength="10" require> 
+                        <input type="text" id="symbol" name="symbol"
+                        class="symbol span1" placeholder="例如：℃"
+                        ng-model="form.properties.symbol" ng-maxlength="6" require>
+                        <!--  <div>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                <li><a tabindex="-1" href="#" ng-bind="" ng-repeat="">c</a></li>
+                                <li><a tabindex="-1" href="#" ng-bind="" ng-repeat="">c</a></li>
+                                <li><a tabindex="-1" href="#" ng-bind="" ng-repeat="">c</a></li>
+                                <li><a tabindex="-1" href="#" ng-bind="" ng-repeat="">c</a></li>
+                                <li><a tabindex="-1" href="#" ng-bind="" ng-repeat="">c</a></li>
+                                <li><a tabindex="-1" href="#" ng-bind="" ng-repeat="">c</a></li>
+                            </ul>
+                        </div> -->
+                        <span ng-show="sensorForm.unitName.$dirty &&(sensorForm.unitName.$error.required||sensorForm.unitName.$error.maxlength)">单位为1-10个字符</span>
+                        <span ng-show="sensorForm.symbol.$dirty && (sensorForm.symbol.$error.required||sensorForm.symbol.$error.maxlength)">符号为1-6个字符</span>
+                    </div>
+                </div>
+                <div class="control-group" ng-show="showProviderDiv">
+                    <label id="provider-label" class="control-label">微博提供商</label>
+                    <div class="controls">
+                        <select id="provider" class="span3"
+                            ng-model="form.provider"
+                            ng-options="p.value as p.name for p in providers"
+                            data-style="btn-primary" bs-select></select>
+                        <button id="provider_btn" type="button"
+                            class="btn" data-unique="1"
+                            data-placement="top">获取授权</button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="tags">标签Tags</label>
+                    <div class="controls">
+                        <input type="text" name="tags"
+                            placeholder="标签之间请使用逗号(,)分隔" id="tags"
+                            class="span3 ng-pristine ng-invalid ng-invalid-required ng-valid-minlength" ng-maxlength="40"
+                            ng-model="form.tags" required> 
+                            <span ng-show="sensorForm.tags.$dirty && (sensorForm.tags.$error.required||sensorForm.tags.$error.maxlength)">格式错误,标签长度1-40</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="desc">描述</label>
+                    <div class="controls">
+                        <textarea id="description" name="desc" rows="6"
+                            placeholder="为您的传感器添加描述" class="span10"
+                            ng-model="form.description"
+                            ng-maxlength="40"></textarea>
+                        <span ng-show="sensorForm.desc.$dirty && sensorForm.desc.$error.maxlength">格式错误,描述长度少于40</span>
+                    </div>
+                </div>
+                <div class="pull-right detail-img">
+                    <button ng-show="Add" class="btn btn-info"
+                        ng-disabled="sensorForm.$invalid"
+                        ng-click="addSensor()">√ 保存</button>
+                    <button ng-show="!Add" class="btn btn-info"
+                        ng-disabled="sensorForm.$invalid"
+                        ng-click="updateSensor()">√ 更新</button>
+                    <button class="btn btn-info" ng-click="discard()">X取消</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

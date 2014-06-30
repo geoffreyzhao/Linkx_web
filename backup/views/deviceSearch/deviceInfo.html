@@ -1,0 +1,39 @@
+<div ng-controller="deviceInfoController" class="device-info">
+  <form class="form-horizontal">
+    <div class="span8">
+        <div class="device-info-gis gis">
+            <div id="map-canvas" style=""></div>
+        </div>
+    </div>
+    <div class="span4">
+        <div class="device-info-title find-device-title" ng-bind="device.title"></div>
+        <div class="device-info-block">
+            <div class="control-group">
+                <label class="control-label">设备ID</label>
+                <div class="controls" ng-bind="device.id"></div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">创建者</label>
+                <div class="controls" ng-bind="device.user.userName"></div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">设备数目</label>
+                <div class="controls" ng-bind="device.sensorCount"></div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">设备标签</label>
+                <div class="controls" ng-bind="device.tags"></div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">设备位置</label>
+                <div class="controls" ng-bind="device.position"></div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">设备描述</label>
+                <div class="controls" ng-bind="device.description"></div>
+            </div>
+        </div>
+        <div class="return-btn"><button class="btn btn-info" ng-click="oper.returnSearchPage()">返回搜索页面</button></div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,123 @@
+<div ng-class="{'edit-sensor-detail':sensorStatus == 'edit'}">
+    <div ng-class="{'del-sensor-detail':sensorStatus == 'del'}">
+        <table class="add-sensor" ng-controller="addSensorCtrl">
+
+            <tr>
+                <td width="120">传感器名称</td>
+                <td width="250">
+                    <div class="form-group">
+                        <input type="text" class="sensor-title" id="sensor-title" name="title"ng-blur="verifyTitle()" placeholder="请输入传感器名称" ng-model="sensor.title"  ng-class="{'error':titleError}" ng-disabled="delTag">
+                    </div>
+                </td>
+                <td width="130"><span class="add-sensor-type">类型</span></td>
+                <td>
+                    <select class="form-control" ng-model="sensorType" name="" 
+                       ng-options="p.name for p in sensorTypes" ng-disabled="delTag">
+                    </select>
+                </td>
+            </tr>
+            <tr ng-show="showNumberProperty">
+                <td>单位/符号</td>
+                <td colspan="3">
+                    <div class="form-group">
+                         <input type="text" class="add-sensor-unitname" id="" placeholder="例如：摄氏度" ng-model="sensor.properties.unit" ng-class="{'error':unitNameError}" ng-disabled="delTag">
+                          <input type="text" class="add-sensor-symbol" id="" placeholder="例如：℃" ng-model="sensor.properties.symbol" ng-class="{'error':symbolError}" ng-disabled="delTag">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>标签</td>
+                <td colspan="3" class="add-sensor-tags">
+                     <table >
+                         <tr>
+                             <td ng-show="addTag" ng-class="{'tag-active':sensorTag == sensor.tags}" ng-repeat="sensorTag in sensorTags" ng-bind="sensorTag" ng-click="selectSensorTag(sensorTag)"></td>
+                             <td ng-show="editTag" ng-class="{'edit-tag-active':sensorTag == sensor.tags}" ng-repeat="sensorTag in sensorTags" ng-bind="sensorTag" ng-click="selectSensorTag(sensorTag)"></td>
+                             <td ng-show="delTag" ng-class="{'del-tag-active':sensorTag == sensor.tags}" ng-repeat="sensorTag in sensorTags" ng-bind="sensorTag" >del</td>
+                         </tr>
+                     </table>
+                </td>
+            </tr>
+            <tr>
+                 <td>描述</td>
+                <td colspan="3">
+                    <textarea id="sensor-desc" class="form-control" class="form-control" rows="3"  ng-model="sensor.description" ng-disabled="delTag"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+
+                    <li class="bg-color-green cursor-pointer border-radius-sensor-img sensor-submit-img" ng-click="addSensor();" ng-show="addTag === true" title="确定">
+                    <li class="bg-color-gray cursor-pointer border-radius-sensor-img sensor-submit-cancel" ng-click="cancel();" ng-show="addTag == true" title="取消">
+                    <li class="bg-color-green cursor-pointer border-radius-sensor-img sensor-submit-img" ng-click="editSensor();" ng-show="editTag === true" title="确定">
+                    <li class="bg-color-gray cursor-pointer border-radius-sensor-img sensor-submit-cancel" ng-click="cancelEditSensor(sensor);" ng-show="editTag === true" title="取消">
+                    <li class="bg-color-green cursor-pointer border-radius-sensor-img sensor-submit-img" ng-click="delSensor();" ng-show="delTag === true" title="确定">
+                    <li class="bg-color-gray cursor-pointer border-radius-sensor-img sensor-submit-cancel" ng-click="cancelEditSensor(sensor);" ng-show="delTag === true" title="取消">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- <form class="form-horizontal" role="form" ng-controller="addSensorCtrl" >
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">传感器名称:</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="inputEmail3" placeholder="请输入传感器名称" ng-model="sensor.title" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label" >类型:</label>
+        <div class="col-xs-2">
+            <select class="form-control" ng-model="sensorType" name="" 
+               ng-options="p.name for p in sensorTypes" >
+            </select>
+        </div>
+    </div>
+
+
+     <div class="form-group" ng-show="showNumberProperty">
+        <label for="inputEmail3" class="col-sm-2 control-label">单位/符号:</label>
+        <div class="col-xs-3">
+            <input type="text" class="form-control" id="exampleInputEmail2" placeholder="例如：摄氏度" ng-model="sensor.properties.unitName">
+        </div>
+
+        <div class="mydevice-width-15"></div>
+
+        <div class="col-xs-2">
+            <input type="text" class="form-control" id="exampleInputPassword2" placeholder="例如：℃" ng-model="sensor.properties.symbol">
+        </div>
+    </div>
+
+     <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">标签/Tags:</label>
+        <div class="sensor-tags" ng-repeat="sensorTag in sensorTags" >
+            <input type="radio" ng-model="sensor.tags" value="{{sensorTag}}"> {{sensorTag}}<br/>
+        </div>
+        
+        
+        
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">描述:</label>
+        <div class="col-sm-6">
+            <textarea class="form-control" class="form-control" rows="3" placeholder="请输入设备描述" ng-model="sensor.description"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="" style="margin-left: 180px;">
+            <button class="btn btn-primary" ng-click="addSensor();" ng-show="editTag !== true">添加</button>
+            <button class="btn btn-primary" ng-click="editSensor();" ng-show="editTag === true">修改</button>
+            <button class="btn btn-primary" ng-click="cancel();" ng-show="editTag !== true">取消</button>
+            <button class="btn btn-primary" ng-click="cancelEditSensor(sensor);" ng-show="editTag === true">取消</button>
+        </div>
+    </div>
+
+    <div class="error-msg alert alert-danger fade in" ng-show="errorSensorMessage">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="hideDeviceErrorMessage()">×</button>
+        <strong>添加传感器失败!</strong>{{errorSensorMessage}}.
+    </div>
+
+</form> -->
+

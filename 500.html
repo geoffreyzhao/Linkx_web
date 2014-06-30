@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+  <style type="text/css">
+    .navbar {width: 100%;background-color: #999;position: fixed;top: 0;left: 0;right: 0;height: 50px;}
+    .mylinkx-logo {position: relative;top: 0;margin: 0 auto;width: 140px;display: block;}
+    .logo-background {
+        position: absolute;width: 120px;top: 50px;border-top: 70px solid #005D9A;
+        border-left: 10px solid rgba(0, 0, 0, 0);border-right: 10px solid rgba(0, 0, 0, 0);
+    }
+    .logo-container {
+        padding-top: 16px;width: 120px;height: 104px;background-color: #0071BC;text-align: center;
+        position: absolute;left: 10px;
+    }
+    div.container {position: relative;top: 200px;width: 300px;margin: 0 auto;height: 50px;}
+    div.error {
+        width: 50px;height: 50px;float: left;background-color: #c70000;border-radius: 50px;
+        margin-right: 10px;background-image: url("images/mylinkx/icon_yes_no.png");
+        background-repeat: no-repeat;background-position: -42px 15px;
+    }
+    p.blod {font-size: 16px;font-weight: bold;color: #333;}
+    p.info {font-size: 14px;color: #7a7a7a;}
+  </style>
+  <script type="text/javascript" src="vendor/jquery/jquery-2.0.3.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      var _timeout,
+          _interval,
+          $social = $("#social"),
+          n = 5,
+          _tempStr;
+      _timeout = setTimeout(function () {
+        clearInterval(_interval);
+        clearTimeout(_timeout);
+        window.close();
+      }, 5000);
+      
+      switch(window.name) {
+        case "weibo": 
+          _tempStr = "微博账号";
+          break;
+        case "qzone": 
+          _tempStr = "QQ空间";
+          break;
+      }
+      $("#name").text(_tempStr);
+      _interval = setInterval(function() {
+        $social.text(--n);
+      }, 1000);
+    })();
+  </script>
+</head>
+<body>
+    <div class="navbar">
+      <a class="mylinkx-logo" href="#">
+          <div class="logo-background"></div>
+          <div class="logo-container">
+              <img src="images/mylinkx/logo.png"/>
+          </div>
+      </a>
+    </div>
+    <div class="container">
+      <div class="error"></div>
+      <div class="content">
+        <p class="blod">抱歉!您绑定的<span id="name"></span>出错.</p>
+        <p class="info">在&nbsp;<span id="social">5</span>&nbsp;秒钟之后会自动跳转回之前页面.</p>
+      </div>
+      <div class="clear"></div>
+    </div>
+</body>
+</html>

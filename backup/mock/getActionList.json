@@ -1,0 +1,28 @@
+{
+    "code": 200,
+    "message": "Get action success",
+    "data": [
+        {
+            "id": "1",
+            "name": "超级邮件1",
+            "actionType": "EMAIL",
+            "email": "123@qq.com",
+            "provider": "",
+            "pushType": ""
+        }, {
+            "id": "2",
+            "name": "刷微博",
+            "actionType": "WEIBO",
+            "email": "",
+            "provider": "SINA",
+            "pushType": ""
+        }, {
+            "id": "3",
+            "name": "敏感推送",
+            "actionType": "WEBSITE_PUSHING",
+            "email": "",
+            "provider": "",
+            "pushType": "PUSHTO_SENSOR"
+        }
+    ]
+}

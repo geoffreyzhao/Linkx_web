@@ -1,0 +1,416 @@
+/*google map module*/
+.gis {
+    border: 1px solid #B8C7F5;
+    margin: 0 auto;
+    margin-right: 5px;
+}
+.gis #map-canvas {
+    background: url("css/img/connectFail.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 450px !important;
+    /*width: 949px;
+    position: relative;*/
+}
+
+.gis .location{
+    margin-right:20px;
+    margin-left:5px;
+    margin-top:5px;
+    width: 200px;
+    -webkit-border-radius: 4px;
+}
+.gis .search-location{
+    width: 400px;
+    margin-top:5px;
+}
+.gis .search{
+    width: 75px;
+    height: 25px;
+    margin-top:5px;
+}
+
+.gis ul {
+    list-style: none;
+}
+
+.tipLabel{
+    width: 29px;
+    display: inline-block;
+    text-align: left;
+    margin-right: 10px;
+}
+
+.popover.top .arrow {
+    left: 14%;
+}
+
+.popover.top {
+    max-width: 930px;
+}
+
+/*Device detail*/
+.detail-item {
+    display: inline;
+    margin-left: 20px;
+}
+
+.detail-item p {
+    margin-left: 20px;
+}
+
+.detail-item label {
+    cursor: default;
+    font-size: 13px;
+    font-weight: bold;
+}
+.detail-item .descriptionLabel {
+    float: left;
+    margin-left: 19px;
+}
+
+.detail-item textarea {
+    width: 596px;
+    height: 100px;
+    background-color: white;
+    float: left;
+    margin-left: 6px;
+}
+
+#device-right {
+    border-left: 1px solid rgb(190, 190, 190);
+    padding-left: 10px;
+    min-height: 677px;
+    margin-left: 210px;
+    margin-bottom: 40px;
+    float: none;
+}
+
+#device-right .image-show {
+    float: left;
+    margin-top: 99px;
+}
+
+.deviceView .span3 {
+    width: 195px;
+    float: left;
+}
+
+.deviceView #deviceForm {
+    float: none;
+    margin-bottom: 78px;
+}
+
+.deviceView hr{
+    margin: 10px 0;
+}
+
+.search {
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+.searchInput {
+    width: 96%;
+}
+.deviceName {
+    font-size: 14pt;
+    height: 80px;
+    width: 300px;
+    padding-left: 20px;
+}
+.deviceName h2 {
+    height: 40px;
+}
+
+.deviceName .device-oper {
+}
+
+.device-oper button {
+    margin-right: 0px;
+    height: 23px;
+    line-height: 16px;
+}
+
+#addDevice, #addAction {
+    font-size: 14pt;
+    height: 10px;
+    line-height: 10px;
+    margin-right: -4px;
+}
+
+.radioSpan {
+    margin-right: 20px;
+    float: left;
+    width: 64px;
+}
+
+.controls textarea {
+    height: 189px;
+    width: 97%;
+}
+
+.control-group .deviceOpr {
+    margin-right: 120px;
+}
+
+#imageDiv {
+    background: url('./img/upload_photo_button.jpg') center no-repeat;
+    width: 100px;
+    height: 30px;
+    overflow: hidden;
+    position: relative;
+    left: 48px;
+    top: -13px;
+}
+
+#imageUpload {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    filter: alpha(opacity=10);
+    -moz-opacity: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* .image-show {
+    float: left;
+    font-size: 14px;
+    position: relative;
+} */
+
+/*.image-show a:first-child{
+    margin-left: 28px;
+    cursor: pointer;
+    position: absolute;
+    left: -40px;
+    top: 88px;
+}
+.image-show a:nth-child(2){
+    margin-left: 28px;
+    cursor: pointer;
+    position: absolute;
+    left: 171px;
+    top: 88px;
+}*/
+
+#uploadButton {
+    display: none;
+}
+
+.tip {
+    font-size: 11px;
+    color: rgb(194, 157, 157);
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.breadcrumb {
+    font-size: 14pt;
+    font-weight: bold;
+}
+.form-horizontal .controls {
+    margin-left: 91px;
+}
+
+.form-horizontal .control-label {
+    width: 82px;
+    font-weight: bold;
+}
+
+#myCarousel {
+    width: 220px;
+    height: 150px;
+    position: relative;
+    background: url('../upload/default.jpg') no-repeat;
+    background-position: center;
+}
+
+.item {
+    position: relative;
+}
+
+.item .image-oper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 20%;
+    display: none;
+}
+
+.item:hover .image-oper {
+    position: absolute;
+    left: 0px;
+    top: 85%;
+    width: 100%;
+    height: 20%;
+    display: block;
+    background-color: rgba(9, 19, 9, 0.5);
+}
+
+.item:hover .imagePre, .item:hover .imageNext {
+    display: block;
+}
+
+.item .image-oper a {
+    cursor: pointer;
+    margin-top: 5px;
+    margin: auto;
+    display: inherit;
+    width: 30px;
+}
+
+.imagePre {
+    left: 0 !important;
+    width: 30px;
+    top: 47%;
+    display: none;
+}
+
+.imageNext {
+    width: 30px;
+    top: 47%;
+    right: 0px !important;
+    display: none;
+}
+
+/*search device*/
+/*.search-checkbox {
+    display:inline-block;
+    top: 4px;
+    position: relative;
+    margin-left: 10px;
+}*/
+
+.search-all {
+    display:inline-block;
+    top: 3px;
+    position: relative;
+    margin-right: 10px;
+    cursor: pointer;
+    width: 34px;
+    text-align: center;
+}
+
+.search-all-selected {
+    background-color: #007ad5;
+    color: #fff;
+}
+
+.table {
+    width:100%;
+}
+
+.page {
+	text-align: center;
+}
+
+.page-input {
+	width: 50px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.page-info {
+	display: inline-block;
+    margin-left: 20px;
+}
+
+.page-select {
+	text-align: center;
+    display: inline-block;
+}
+
+.page-select select {
+	width:100px;
+}
+/*gps
+.gis .location{margin-right:20px;margin-left:5px;margin-top:5px;width: 200px;}
+      .gis .search-location{width: 400px;margin-top:5px;}
+      .gis .search{background-color: #FFFFFF; width: 75px; height: 25px;margin-top:5px;}*/
+      
+
+.navibar-device-index {
+    width: 250px;
+    margin-left: 100px;
+    padding-left: 0px;
+    min-height: 0px;
+    height: 27px;
+    background-color: #36B1AC;
+    box-shadow: 0 4px 6px 0 #24A09B;
+}
+
+/**device-info**/
+.device-info-gis {
+    margin-bottom: 50px;
+}
+
+.device-info-block {
+    margin-left: 50px;
+}
+
+.device-info-block .controls{
+    margin-left: 110px;
+    margin-top: 4px;
+}
+
+.device-info-block .control-label {
+    cursor: auto;
+}
+
+.device-info-tag {
+    margin: 20px auto 10px;
+    font-size: 18px;
+}
+
+.device-info-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.device-info .return-btn {
+	display: inline-block;
+    margin-left: 257px;
+    margin-top: 100px;
+}
+
+
+/********sensor info************/
+.sensor-info-title {
+	font-size: 16px;
+    color: #007AD5;
+    font-weight: bold;
+}
+
+.sensor-info-dp-block {
+    width:1019px;
+    height:366px;
+}
+
+.sensor-info-dp {
+    float:left;
+}
+
+.sensor-dp-currentValue-block {
+    display:inline-block;
+    float:left;
+    width: 100px;
+    height:300px;
+    text-align:center;
+}
+
+.sensor-dp-currentValue {
+	font-size:35px;
+	color:#0061AB;
+	margin: 20px auto;
+}
+
+.sensor-info .switch-img {
+	cursor: auto;
+}
+
+.sensor-info .return-btn {
+	display: inline-block;
+    margin-left: 1000px;
+}

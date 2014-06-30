@@ -1,0 +1,76 @@
+<div class="my-device-detail right-content-container" ng-if="!!device">
+    <div class="mydevice-info-block" style="position:relative;">
+        <h2 class="margin-bottom-20">设备信息</h2>
+        <div class="bg-color-blue edit-device operator-signal-item-icon"
+             ng-if="device.statusTag == 'OWN'" ng-click="oper.goEditDevice();"></div>
+        <div class="follow-device-detail-oper cursor-pointer"
+                ng-if="(device.statusTag == 'FOLLOWED') && (device.type != 'ALLJOYN_DEVICE')"
+                title="{{i18n('my_followed_device_help_info')}}" ng-click="unFollowDevice();" >
+            <div class="follow-icon follow-device-detail-unfollow"></div>
+            <span class="follow-device-detail-help-info">{{i18n('my_followed_device_info')}}</span>
+        </div>
+        <div class="follow-device-detail-oper cursor-pointer"
+                ng-if="(device.statusTag == 'NONE') && (device.type != 'ALLJOYN_DEVICE')"
+                title="点击关注设备" ng-click="followDevice();">
+            <div class="follow-icon follow-device-detail-follow"></div>
+            <span class="follow-device-detail-help-info">添加关注</span>
+        </div>
+        <div class="device-detail-info-table">
+            <div class="device-detail-info-block">
+                <div class="device-detail-title-block">
+                    <h2 class="device-detail-title">{{device.title}}</h2>
+                    <span class="device-detail-status" title="{{i18n(device.status)}}" ng-class="{'online-large-icon': device.status == 'ONLINE', 'offline-large-icon' : device.status == 'OFFLINE'}"></span>
+                    <p style="word-break: break-word;height: 78px;">{{device.description}}</p>
+                </div>
+                <div class="device-detail-info" title="{{i18n('device_tags')}}">
+                    <div class="device-detail-info-icon device-tags-icon"></div><span style="margin-left: 4px;">{{device.tags | deviceTagFilter}}<span>
+                </div>
+                <div class="device-detail-info">
+                    <div class="device-detail-info-icon device-position-icon" title="{{i18n('device_position')}}"></div>
+                    <span class="device-detail-info-text">{{device.position | positionFilter}}</span>
+                    <div class="device-detail-info-icon device-placetype-icon" title="{{i18n('device_placetype')}}"></div>
+                    <span class="device-detail-info-text-right">{{device.placeType === 'INSIDE' ? '户内': '户外'}}</span>
+                </div>
+                <div class="device-detail-last-info">
+                    <div class="device-detail-info-icon device-type-icon" title="{{i18n('device_type')}}"></div>
+                    <span class="device-detail-info-text">
+                    {{device.type == 'OWN_DEVICE' ? '自制设备': device.type == 'ALLJOYN_DEVICE'?'ALLJOYN设备':'LINKX设备'}}</span>
+                    <div class="device-detail-info-icon device-exposed-icon" title="{{i18n('device_exposed')}}"></div>
+                    <span class="device-detail-info-text-right">{{device.isExposed === 1 ? '公开': '私有'}}</span>
+                </div>
+            </div>
+            <div ng-if="!!showCarousel">
+              <div device-image-carousel value="device.carousel" baseurl="imageBaseUrl"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOT ALLJOYN DEVICE -->
+    <div class="my-device-sensor device-sensor-block" data-info="my-device-sensor" ng-controller="sensorCtrl" ng-include="partials.mylinkx_sensor_detail" ng-if="device.type !== 'ALLJOYN_DEVICE'"></div>
+
+    <!-- ALLJOYN DEVICE-->
+    <div class="device-control-block" ng-include="partials.mylinkx_controlpanel_detail" ng-if="device.type == 'ALLJOYN_DEVICE'" ng-controller="controlPanelCtrl"></div>
+
+    <div id="myOwnDeviceLightbox" class="modal fade bs-modal-sm light-box-container" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+            aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header confirm-dialog-header">
+                  <a class="close confirm-dialog-close" data-dismiss="modal" ng-click="closeSupersized();" aria-hidden="true"></a>
+                  <label class="modal-title" id="myModalLabel">设备封面</label>
+                </div>
+                <div class="modal-body">
+                    <div lightbox class="light-box" baseurl="imageBaseUrl"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="my-device-detail right-content-container" ng-if="!device">
+    <div class="mydevice-info-block" style="position:relative;">
+        <h2 class="margin-bottom-20">设备信息</h2>
+        <div style="line-height:100px;padding-left:32%;">
+            这个设备不存在。
+        </div>
+    </div>
+</div>

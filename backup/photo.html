@@ -1,0 +1,30 @@
+<!-- saved from url=(0022)http://internet.e-mail -->
+<!doctype html>
+<html lang="en" ng-app="LinkX">
+    <head>
+        <!--  <meta charset="utf-8">-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title ng-bind="siteTitle"></title>
+    </head>
+    <script type="text/javascript" src="vendor/jquery-2.0.3.js"></script>
+    <script>
+        function uploadImg() {
+            //var url="v1.0/device/1/sensor/56/photo;
+            console.log($("#url").val());
+            document.form1.action = $("#url").val();
+            document.form1.submit();
+       }
+    </script>
+    <body>
+    <div>
+        <form action="" name="form1" method="post" enctype="multipart/form-data">
+                                    接口:<input type="text" id="url"/><br>
+            apiKey:<input type="text" id="apiKey"/><br>
+           <p>
+                                    选择图片: <input type="file" name="file" size="45" />
+           </p>
+           <input type="button" value="上传" onclick="uploadImg();"/>
+        </form>
+    </div>
+    </body>
+</html>

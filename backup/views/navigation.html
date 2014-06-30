@@ -1,0 +1,43 @@
+<div class="" ng-controller="naviController">
+    <div class="navbar">
+        <div class="navibar-inner">
+                <ul class="nav" bs-navbar>
+                    <li data-match-route="/">
+                        <a href="#/">{{_rb.home}}</a>
+                    </li>
+                    <li data-match-route="/mydevice" ng-show="user.login">
+                        <a href="#/mydevice">{{_rb.mydevice}}</a>
+                    </li>
+                    <li data-match-route="/searchDevice" ng-show="user.login">
+                        <a href="#/searchDevice">{{_rb.searchdevice}}</a>
+                    </li>
+                    <li data-match-route="/findDevice" ng-show="user.login">
+                        <a href="#/findDevice">{{_rb.finddevice}}</a>
+                    </li>
+                </ul>
+                <ul class="nav pull-right">
+                    <select class="multi-language"
+                        ng-show="user.logout"
+                        ng-model="i18n.language"
+                        ng-options="l.locale for l in languages">
+                    </select>
+                </ul>
+                <ul class="nav pull-right" bs-navbar>
+                    <li data-match-route="/login" ng-show="user.logout" id="login" >
+                        <a href="#/login">{{_rb.login}}</a>
+                    </li>
+                    <li data-match-route="/register" ng-show="user.logout" id="register">
+                        <a href="#/register">{{_rb.register}}</a>
+                    </li>
+                </ul>
+                <ul class="nav pull-right" bs-navbar>
+                    <li data-match-route="/account" ng-show="user.login" id="username">
+                        <a href="#/account">{{user.userName}}</a>
+                    </li>
+                    <li ng-show="user.login" id="logout">
+                        <a href="" ng-controller="logoutController" ng-click="logout()">{{_rb.logout}}</a>
+                    </li>
+                </ul>
+        </div>
+    </div>
+</div>

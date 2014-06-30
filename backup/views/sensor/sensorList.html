@@ -1,0 +1,161 @@
+<div ng-controller="sensorListController">
+    <div ng-show="haveDevice">
+        <div class="sensor-block" ng-repeat="sensor in sensorList">
+            <!-------------------------DpInfo------------------------------>
+            <div class="sensor-info-block">
+                <img ng-src="{{sensor.imgPath}}"
+                    class="sensor-img img-rounded pull-left detail-img"></img> <br>
+                <h4 ng-bind="sensor.title" class="sensor-title"></h4>
+                <br>
+                <button ng-click="oper.editSensor(sensor)"
+                    class="btn btn-info">编辑</button>
+                <button ng-click="oper.removeSensor(sensor)"
+                    class="btn btn-info">移除</button>
+                <div class ="desc" ng-bind="sensor.description"></div>
+            </div>
+            <div class="sensor-dp-block">
+                <!-------------------------DpURLInfo------------------------------>
+                <!--Number-->
+                <div class="sensor-dp-url-info"
+                    ng-show="sensor.type=='NUMBER'">
+                    <h5>数据曲线</h5>
+                </div>
+                <!--Switch-->
+                <div class="sensor-dp-url-info"
+                    ng-show="sensor.type=='SWITCH'">
+                    <h5>状态URL</h5>
+                </div>
+                <!--Switch-->
+                <div class="sensor-dp-url-info"
+                    ng-show="sensor.type=='IMAGE'">
+                    <h5>图像URL</h5>
+                </div>
+                <!-------------------------DpURL------------------------------>
+                <div class="sensor-dp-url"  >
+                    URL:<span id ="url{{sensor.id}}" ng-bind="sensor.url"></span>
+                    <!-- <span id="clip_button{{sensor.id}}"><b>复制</b></span> -->
+                    <!--  <span id="clip_container{{sensor.id}}"><button id="clip_button{{sensor.id}}" ng-click="oper.copyUrl(sensor.id)"><b>复制</b></button></span>-->
+                </div>
+                <!-------------------------Dp display------------------------------>
+                <!--Number-->
+                <div ng-show="'NUMBER'==sensor.type">
+                    <div class="sensor-dp-imagetime">
+                        <span>查看时间段: 从</span>
+                        <div id="numPicker{{sensor.id}}1" class="input-append date">
+                            <input id="numStartDate{{sensor.id}}" data-format="yyyy-MM-dd hh:mm:ss" type="text"></input>
+                            <span class="add-on" ng-click="showTime">
+                                <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                </i>
+                            </span>
+                        </div>
+                        
+                        <span>到</span>
+                        <div id="numPicker{{sensor.id}}2" class="input-append date">
+                            <input id="numEndDate{{sensor.id}}" data-format="yyyy-MM-dd hh:mm:ss" type="text"></input>
+                            <span class="add-on" ng-click="showTime">
+                                <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                </i>
+                            </span>
+                        </div>
+                        <button class="btn btn-info" ng-click="oper.setNumTime(sensor.id);">确定</button>
+                        <button ng-click="oper.setNumCurrentTime(sensor.id);" class="btn btn-info">当前时间</button>
+                    </div>
+                    <div class="number-range btn-group">
+                        <button class="btn" ng-click="oper.selectNumberRange(sensor.id,'1h')">1h</button>
+                        <button class="btn" ng-click="oper.selectNumberRange(sensor.id,'3h')">3h</button>
+                        <button class="btn" ng-click="oper.selectNumberRange(sensor.id,'12h')">12h</button>
+                        <button class="btn" ng-click="oper.selectNumberRange(sensor.id,'1d')">1d</button>
+                        <button class="btn" ng-click="oper.selectNumberRange(sensor.id,'3d')">3d</button>
+                        <button class="btn" ng-click="oper.selectNumberRange(sensor.id,'1w')">1w</button>
+                        <button class="btn" ng-click="oper.selectNumberRange(sensor.id,'1m')">1m</button>
+                        <button class="btn" ng-click="oper.selectNumberRange(sensor.id,'3m')">3m</button>
+                        <button class="btn" ng-click="oper.selectNumberRange(sensor.id,'6m')">6m</button>
+                        <button class="btn" ng-click="oper.selectNumberRange(sensor.id,'1y')">1y</button>
+                        <button class="btn" ng-click="oper.selectNumberRange(sensor.id,'all')">all</button>
+                    </div>
+                    <div id="chartdiv{{sensor.id}}" class="sensor-dp" ></div>
+                    
+                    <div>
+                        <div ng-include src="'views/sensor/trigger.html'">增加触发</div>
+                    </div>
+                </div>
+                
+                <!--Switch-->
+                <div id="" class="sensor-dp" ng-show="'SWITCH'==sensor.type">
+                    <h5>控制操作</h5>
+                    <br>按动图标以改变开关的状态
+                    <div ng-click="oper.changeSwitchStatus(sensor)"
+                        class="switch-img">
+                        <div ng-show="'OFF'==sensor.status">
+                            <img ng-src="css/img/sensor/switch_off.jpg" />
+                        </div>
+                        <div ng-show="'ON'==sensor.status">
+                            <img ng-src="css/img/sensor/switch_on.jpg" />
+                        </div>
+                    </div>
+                    <span ng-show="sensor.processing">正在发送请求
+                    <img src="css/img/sensor/processing.gif" /></span>
+                </div>
+                <!-- GPS -->
+                <div class="sensor-dp" ng-show="'GPS'==sensor.type">
+                    <div style="margin-bottom: 10px;margin-left: 10px;">
+                        <input type="radio" ng-click="clickTrack('track', sensor.id);" name="gpsType{{sensor.id}}" value="track" ng-model="gpsRadio">跟踪
+                        <input type="radio" ng-click="clickTrack('trackBack', sensor.id);" name="gpsType{{sensor.id}}" value="trackBack" ng-model="gpsRadio">回放
+                        <div ng-show="showTrackBack[sensor.id]">
+                            <span>查看时间段: 从</span>
+                            <!-- <input id="beginTime{{sensor.id}}" type="text" > -->
+                            <div id="datetimepicker{{sensor.id}}1" class="input-append date">
+                                <input id="beginTime{{sensor.id}}" data-format="yyyy-MM-dd hh:mm:ss" type="text"></input>
+                                <span class="add-on" ng-click="showTime">
+                                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                  </i>
+                                </span>
+                            </div>
+                            <span>到</span>
+                            <!-- <input id="endTime{{sensor.id}}" type="text" > -->
+                            <div id="datetimepicker{{sensor.id}}2" class="input-append date">
+                                <input id="endTime{{sensor.id}}" data-format="yyyy-MM-dd hh:mm:ss" type="text"></input>
+                                <span class="add-on" ng-click="showTime">
+                                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                  </i>
+                                </span>
+                            </div>
+                            <button class="btn btn-info" ng-click="trackBackGPS(sensor.id);">回放</button>
+                        </div>
+                        <div class="alert" id="gpsAlert{{sensor.id}}" style="display: none">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>Warning!</strong> There is no new data founded.
+                        </div>
+                    </div>
+                    <div id="gpsdiv{{sensor.id}}" class="sensor-dp"></div>
+                </div>
+                <!--Image-->
+                <div id="" class="sensor-dp" ng-show="'IMAGE'==sensor.type">
+                     <div class="sensor-dp-imagetime">
+                            <span>查看时间段: 从</span>
+                            <div id="timelinePicker{{sensor.id}}1" class="input-append date">
+                                <input id="startDate{{sensor.id}}" data-format="yyyy-MM-dd hh:mm:ss" type="text"></input>
+                                <span class="add-on" ng-click="showTime">
+                                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                  </i>
+                                </span>
+                            </div>
+                            
+                            <span>到</span>
+                            <div id="timelinePicker{{sensor.id}}2" class="input-append date">
+                                <input id="endDate{{sensor.id}}" data-format="yyyy-MM-dd hh:mm:ss" type="text"></input>
+                                <span class="add-on" ng-click="showTime">
+                                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                  </i>
+                                </span>
+                            </div>
+                            <button class="btn btn-info" ng-click="oper.setTime(sensor.id);">确定</button>
+                            <button ng-click="oper.setCurrentTime(sensor.id);" class="btn btn-info">当前时间</button>
+                        </div>
+                        
+                    <div id="timelineDiv{{sensor.id}}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

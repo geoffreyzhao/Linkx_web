@@ -1,0 +1,19 @@
+<div ng-controller="deviceListController">
+    <!-- <div class="clearfix">
+        <input type="text"><span class="btn btn-info">搜索</span>
+    </div>
+     -->
+    <div class="clearfix">
+        <div>
+            <input type="text" class="searchInput input-xlarge">
+            <!-- <span class="search btn btn-info">搜索</span> -->
+        </div>
+        <div id="addDevice" class="btn btn-info pull-right" ng-click="addDevice()">+</div>
+    </div>
+    <hr>
+    <div>
+        <ul id="deviceList" class="nav nav-list" list><!-- ng-class="{'active':{{$index}}== 0&&{{selectedDevice==undefined}}}" -->
+            <li  ng-repeat="device in deviceList" ng-click="selectDevice()" name="{{device.id}}"><a href="" ng-bind="device.title"></a></li>
+        </ul>
+    </div>
+</div>

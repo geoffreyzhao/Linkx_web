@@ -1,0 +1,16 @@
+﻿<div ng-controller="accountController" class="account search-device-wrapper">
+    <span class="search-device-title">用户中心</span>
+    <hr>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+      <div ng-include src="'views/user/accountMenu.html'" ></div>
+    </div>
+    <div class="span10">
+      <div ng-include src="'views/user/accountInfo.html'" ng-show="showAccountMenu == 'userInfo'" ></div>
+      <!-- ng-show="showAccountMenu == 'changePassword'" -->
+      <div ng-include src="'views/user/changePassword.html'" ng-show="showAccountMenu == 'changePassword'"></div>
+    </div>
+  </div>
+</div>
+</div>

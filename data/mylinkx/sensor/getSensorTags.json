@@ -1,0 +1,12 @@
+{
+    "code" : 200,
+    "message" : "Request has been processed successfully",
+    "url" : null,
+    "data" : [
+        "PM2.5",
+        "PM10",
+        "CO",
+        "SO2",
+        "NO2"
+    ]
+}

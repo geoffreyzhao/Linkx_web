@@ -1,0 +1,31 @@
+<!doctype html>
+<html ng-controller="mainCtrl">
+    <head>
+        <title>LinkX</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="css/normalize.css"/>
+        <link rel="stylesheet" href="vendor/bootstrap3/css/bootstrap.css" />
+        <link rel="stylesheet" href="css/app.css" />
+        <link rel="stylesheet" href="css/mylinkx.css" />
+        <link rel="stylesheet" href="vendor/bootstrap3/css/bootstrap-datetimepicker.min.css" />
+        <link rel="stylesheet" href="vendor/jquery.imgAreaSelect/css/imgareaselect-default.css" />
+
+        <script src="http://api.map.baidu.com/api?v=1.5&ak=M32F7xZ18PZ3571P7iiIuUUY"></script>
+    </head>
+
+    <body>
+        <div class="navi-wrapper" ng-include="partials.navigator"></div>
+        <div class="main-wrapper">
+            <div ng-view class=""></div>
+        </div>
+        <!--<div class="footer-wrapper" ng-include="partials.footer"></div>-->
+        <div class="alert-wrapper" ng-include="partials.alert"></div>
+        <div loading style="background-image:none;"></div>
+
+        <script src="vendor/requirejs/require.js" data-main="js/main.js"></script>
+    </body>
+</html>

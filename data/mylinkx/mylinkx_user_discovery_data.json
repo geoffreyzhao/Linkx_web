@@ -1,0 +1,10 @@
+{
+    "code" : 200,
+    "message" : "Request has been processed successfully",
+    "data" : {
+        "val" : "233",
+        "tag" : "pm2.5",
+        "latitude" : null,
+        "lngitude" : null
+    }
+}

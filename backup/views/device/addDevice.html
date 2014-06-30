@@ -1,0 +1,103 @@
+<div ng-controller="addDeviceController">
+    <div class="span12">
+        <!-- <div ng-include src="'testGis.html'"></div> -->
+        <form class="form-horizontal" id="deviceForm" name="deviceForm">
+            <fieldset>
+                <div class="breadcrumb" ng-show="Add">添加新设备
+                </div>
+                <div class="breadcrumb" ng-show="!Add">更新设备
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="name">设备名称</label>
+                    <div class="controls">
+                        <input placeholder="请输入不少于4个字的设备名" type="text" id="title" name="title" class="span10" ng-model="form.title" ng-minlength="4" required>
+                        <span ng-bind="resourceBundle.DeviceTitleRequried" ng-show="deviceForm.title.$dirty && deviceForm.title.$error.required"></span>
+                        <span ng-bind="resourceBundle.DeviceTitleLength" ng-show="deviceForm.title.$dirty && deviceForm.title.$error.minlength"></span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="tags">标签</label>
+                    <div class="controls">
+                            <input placeholder="请使用逗号隔开多个标签" type="text" name="tags" id="tags" class="span10" ng-model="form.tags" tags required>
+                            <span ng-show="deviceForm.tags.$dirty && deviceForm.tags.$invalid" class="help-inline">请用逗号分隔</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="status">状态</label>
+                    <div class="controls">
+                        <select id="status" class="span10" ng-model="form.status" ng-options="s.value as s.name for s in status" data-style="btn-primary" bs-select>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="type">类型</label>
+                    <div class="controls">
+                        <select class="span10" ng-model="form.type" ng-options="t.value as t.name for t in types" data-style="btn-primary" bs-select>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="location" style="margin-top: -4px;">场地</label>
+                    <div class="controls">
+                        <div bs-buttons-radio directives>
+                            <div class="radioSpan radio"><input value="INSIDE" ng-model="form.placeType" type="radio" >室内</div>
+                            <div class="radioSpan radio"><input value="OUTSIDE" ng-model="form.placeType" type="radio" >室外</div>
+                            <small>添加设备时，默认为室内，代表该设备在室内工作</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="isExposed" style="margin-top: -4px;">是否公开</label>
+                    <div class="controls">
+                        <div bs-buttons-radio>
+                            <div class="radioSpan radio"><input value="1" ng-model="form.isExposed" type="radio">公开</div>
+                            <div class="radioSpan radio"><input value="0" ng-model="form.isExposed" type="radio">不公开</div>
+                            <small>默认接入时是公开的，代表他人可以访问该设备的数据</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="position">位置</label>
+                    <div class="controls">
+                        <input type="text" ng-model="form.position" class="span6" ng-disabled="true" id="position"></input>
+                        <input type="hidden" name="lng" id="lng"/>
+                        <input type="hidden" name="lng" id="lat"/>
+                        <input id="txt_address" class="location" type="text"/>
+                        <input type="button" value="搜索" id= "searchPosition" class="search"/>
+                        <!--<button id= "searchPosition" class="btn btn-info">搜索</button>  -->
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="position">地图</label>
+                    <div class="controls">
+                        <p class="tip">点击地图放置一个标记以表示设备所在的位置，坐标会被自动记录在下面的文本框中。</p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="gis">
+                            <!--ng-controller="setPositionController"  -->
+                            <div id="map-canvas" style=""></div>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="desc">描述</label>
+                    <div class="controls">
+                        <!-- <div ng-include src="'ckEditor.html'"></div> -->
+                        <textarea class="ckeditor" placeholder="为您的设备添加描述" id="desc" name="desc" rows="3" ng-model="form.description"></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="deviceOpr controls pull-left">
+                        <button ng-show="Add" ng-disabled="deviceForm.$invalid" class="btn btn-info" ng-click="addDevice()">√ 保存</button>
+                        <button ng-show="!Add" ng-disabled="deviceForm.$invalid" class="btn btn-info" ng-click="updateDevice()">√ 更新</button>
+                        <button class="btn btn-danger" ng-click="discard()">X 取消</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

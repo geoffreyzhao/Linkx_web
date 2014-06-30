@@ -1,0 +1,64 @@
+<div class="follow-data-detail right-content-container">
+    <div class="mydevice-info-block" style="position:relative;">
+        <h2 class="margin-bottom-20">范围</h2>
+        <div class="follow-device-detail-oper cursor-pointer"
+            ng-if="!!followDataDetail.statusTag" data-toggle="modal"
+            title="{{i18n('my_followed_device_help_info')}}" data-target="#unfollowDataContainer">
+            <div class="follow-icon follow-device-detail-unfollow"></div>
+            <span class="follow-device-detail-help-info">{{i18n('my_followed_device_info')}}</span>
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td width="90%">{{followDataDetail.title}}</td>
+          </tr>
+          <tr>
+            <td colspan="2">{{i18n('follow_data_position')}}：{{followDataDetail.position}}</td>
+          </tr>
+        </tbody>
+    </table>
+
+    <div class="sensor-latestdata-block">
+        <h2 class="margin-bottom-20">实时数据</h2>
+
+        <div class="latest-data-container">
+            <img class="datapoint-loading-img" style="margin-left: 50%;" ng-if="loading.data" ng-src="{{consts.loadingImage}}">
+            <div class="no-data" style="text-align: center;" ng-if="!loading.data" ng-show="!followDataDetail.data || followDataDetail.data.length <= 0">{{i18n('common.no_data')}}</div>
+            <div class="latest-data-item latestdata-block" ng-repeat="data in followDataDetail.data">
+                <div class="text-overflow-block curr-data-title" title="{{data.tag}}" >{{data.tag}}</div>
+                <div>
+                    <span>{{data.val || i18n('common.no_data')}}</span>
+                </div>
+            </div>
+            <div class="hide-bottom-border"></div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="mylinkx-map-title-block" style="position: relative;margin-top: 40px;">
+        <h2 class="margin-bottom-20">地图</h2>
+        <div class="mylinkx-map-lat-lng">
+            <div class="map-icon"></div><span class="map-lat-text">{{followDataDetail.longitude}}</span>
+            <div class="map-icon map-lat-icon"></div><span class="map-lng-text">{{followDataDetail.latitude}}</span>
+        </div>
+    </div>
+    <div id="follows_data_detail_map" class="mydevice-map-block"></div>
+    <div id="unfollowDataContainer" class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+        aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">{{followDataDetail.title}}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{i18n('follow_data_unfollow')}}</p>
+                    <div class="upload-img-toolbar">
+                        <div class="oper-device oper-yes" data-dismiss="modal" ng-click="unfollowData()"></div>
+                        <div class="oper-device oper-no" data-dismiss="modal"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

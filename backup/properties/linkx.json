@@ -1,0 +1,32 @@
+{
+    "device": {
+        "status": "ONWORKING",
+        "type": "OWN_DEVICE",
+        "location": "INSIDE",
+        "isExposed": 1,
+        "lat": 31.20692875060323,
+        "lng": 121.61453247070312
+    },
+    "sensor": {
+        "type": "NUMBER",
+        "provider": "SINA"
+    },
+    "dp": {
+        "number": {
+            "beforeTodayMidnightHour": 0,
+            "afterNowHour": 0
+        },
+        "image": {
+            "intervalMillisecond": 10000,
+            "beforeNowHour": 24,
+            "afterNowHour": 8,
+            "bathPath":"../LinkxImg/upload/dp/"
+        },
+        "gps": {
+            "intervalMillisecond": 20000,
+            "beforeTodayMidnightHour": 0,
+            "afterNowHour": 0
+        },
+        "sizeLimit":200
+    }
+}
